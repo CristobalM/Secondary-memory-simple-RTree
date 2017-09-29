@@ -12,3 +12,5 @@ set(BOOST_REQUESTED_VERSION 1.61)
 
 add_subdirectory(src)
 add_subdirectory(test)
+
+add_subdirectory(boost-cmake)
