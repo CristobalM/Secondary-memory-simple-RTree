@@ -1,5 +1,5 @@
 project(tests)
-add_subdirectory(lib/googletest/googletest)
+add_subdirectory(libs/googletest/googletest)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 
@@ -26,7 +26,7 @@ target_link_libraries(tests RTreeLib gtest gtest_main)
 
 
 if(NOT MSVC)
-    find_package(Boost REQUIRED COMPONENTS date_time filesystem wserialization system serialization thread regex)
+    find_package(Boost REQUIRED COMPONENTS date_time filesystem wserialization system serialization)
     if (Boost_FOUND)
         include_directories(${Boost_INCLUDE_DIRS})
         target_link_libraries(tests ${Boost_LIBRARIES})

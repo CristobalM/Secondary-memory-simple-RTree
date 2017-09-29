@@ -1,0 +1,6 @@
+[submodule "boost-cmake"]
+	path = boost-cmake
+	url = https://github.com/Orphis/boost-cmake.git
+[submodule "test/libs/googletest"]
+	path = test/libs/googletest
+	url = https://github.com/google/googletest
