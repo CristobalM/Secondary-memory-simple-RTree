@@ -4,8 +4,8 @@
 
 #include "RTree.h"
 
-RTree::RTree(SplitHeuristic &splitHeuristic, std::string rootFilename) {
-
+RTree::RTree(SplitHeuristic *splitHeuristic, std::string rootFilename) {
+    this->splitHeuristic = splitHeuristic;
 }
 
 std::vector<int> RTree::search(Rectangle &rectangle) {

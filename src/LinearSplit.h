@@ -8,7 +8,7 @@
 #include "SplitHeuristic.h"
 
 class LinearSplit : SplitHeuristic {
-    void split();
+    void split() override;
 };
 
 

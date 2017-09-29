@@ -9,17 +9,18 @@
 #include <vector>
 #include "Rectangle.h"
 #include "SplitHeuristic.h"
+#include "commontypes.h"
 
 class RTree{
 private:
-    std::vector<Rectangle> node;
+    vRect node;
 
-    SplitHeuristic splitHeuristic;
+    SplitHeuristic *splitHeuristic;
     std::string rootFilename;
 
 public:
 
-    RTree(SplitHeuristic &splitHeuristic, std::string rootFilename);
+    RTree(SplitHeuristic *splitHeuristic, std::string rootFilename);
 
     std::vector<int> search(Rectangle &rectangle);
 

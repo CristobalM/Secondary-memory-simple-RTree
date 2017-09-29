@@ -7,7 +7,8 @@
 
 
 class SplitHeuristic {
-
+public:
+    virtual void split() = 0;
 };
 
 
