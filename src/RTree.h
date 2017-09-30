@@ -11,7 +11,6 @@
 #include "SplitHeuristic.h"
 #include "commontypes.h"
 
-class SplitHeuristic;
 class RTree{
 private:
   vRect node;
