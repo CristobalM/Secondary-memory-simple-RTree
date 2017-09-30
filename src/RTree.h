@@ -13,18 +13,18 @@
 
 class RTree{
 private:
-    vRect node;
-
-    SplitHeuristic *splitHeuristic;
-    std::string rootFilename;
-
+  vRect node;
+  std::string inputFilename;
+  SplitHeuristic *splitHeuristic;
+  std::string rootFilename;
 public:
+  const vRect &getNode() const;
 
-    RTree(SplitHeuristic *splitHeuristic, std::string rootFilename);
+  RTree(SplitHeuristic *splitHeuristic, std::string inputFilename);
 
-    std::vector<int> search(Rectangle &rectangle);
+  std::vector<int> search(Rectangle &rectangle);
 
-    std::vector<int> insert(Rectangle &rectangle);
+  std::vector<int> insert(Rectangle &rectangle);
 };
 
 #endif //tarea1_logaritmos_RTREE_H

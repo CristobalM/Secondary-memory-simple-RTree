@@ -4,14 +4,19 @@
 
 #include "RTree.h"
 
-RTree::RTree(SplitHeuristic *splitHeuristic, std::string rootFilename) {
-    this->splitHeuristic = splitHeuristic;
-}
-
 std::vector<int> RTree::search(Rectangle &rectangle) {
     return std::vector<int>();
 }
 
 std::vector<int> RTree::insert(Rectangle &rectangle) {
     return std::vector<int>();
+}
+
+const vRect &RTree::getNode() const {
+    return node;
+}
+
+RTree::RTree(SplitHeuristic *splitHeuristic, std::string inputFilename) {
+    this->splitHeuristic = splitHeuristic;
+    this->inputFilename = inputFilename;
 }

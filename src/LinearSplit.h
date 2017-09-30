@@ -1,4 +1,4 @@
-//
+  //
 // Created by Cristobal M on 9/26/17.
 //
 
@@ -8,7 +8,10 @@
 #include "SplitHeuristic.h"
 
 class LinearSplit : SplitHeuristic {
-    void split() override;
+private:
+  std::vector<std::vector<float>> separation;
+public:
+  void split(RTree &rTree) override;
 };
 
 
