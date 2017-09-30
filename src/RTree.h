@@ -11,6 +11,7 @@
 #include "SplitHeuristic.h"
 #include "commontypes.h"
 
+class SplitHeuristic;
 class RTree{
 private:
   vRect node;
@@ -18,13 +19,15 @@ private:
   SplitHeuristic *splitHeuristic;
   std::string rootFilename;
 public:
-  const vRect &getNode() const;
 
-  RTree(SplitHeuristic *splitHeuristic, std::string inputFilename);
+  RTree(SplitHeuristic * splitHeuristic, std::string inputFilename);
 
   std::vector<int> search(Rectangle &rectangle);
 
   std::vector<int> insert(Rectangle &rectangle);
+
+
+  const vRect &getNode() const;
 };
 
 #endif //tarea1_logaritmos_RTREE_H

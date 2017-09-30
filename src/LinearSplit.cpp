@@ -2,16 +2,17 @@
 // Created by Cristobal M on 9/26/17.
 //
 
+#include <limits>
 #include "LinearSplit.h"
 
 
-void LinearSplit::split(RTree &rTree) {
+void LinearSplit::split(vRect &node) {
   float minX = std::numeric_limits<float>::infinity();
   float maxX = -minX;
   float minY = minX;
   float maxY = -minX;
-  unsigned long currentNodeSize = rTree.getNode().size();
-  for(Rectangle rectangle : rTree.getNode()){
+  unsigned long currentNodeSize = node.size();
+  for(Rectangle rectangle : node){
     if(maxX < rectangle.x1){
       maxX = rectangle.x1;
     }
@@ -26,8 +27,8 @@ void LinearSplit::split(RTree &rTree) {
     }
   }
   unsigned long pairCount = 0;
-  for(Rectangle rect1 : rTree.getNode()) {
-    for (Rectangle rect2 : rTree.getNode()){
+  for(Rectangle rect1 : node) {
+    for (Rectangle rect2 : node){
 
     }
   }

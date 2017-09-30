@@ -4,6 +4,6 @@
 
 #include "GreeneSplit.h"
 
-void GreeneSplit::split() {
+void GreeneSplit::split(vRect &node) {
 
 }

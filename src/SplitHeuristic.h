@@ -6,11 +6,11 @@
 #define tarea1_logaritmos_SPLITHEURISTIC_H
 
 
-#include "RTree.h"
+#include "commontypes.h"
 
 class SplitHeuristic {
 public:
-    virtual void split(RTree &rTree) = 0;
+    virtual void split(vRect &node) = 0;
 };
 
 

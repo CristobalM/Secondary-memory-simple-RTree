@@ -9,7 +9,7 @@
 #include "SplitHeuristic.h"
 
 class GreeneSplit : SplitHeuristic {
-    void split() override;
+    void split(vRect &node) override;
 };
 
 
