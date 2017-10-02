@@ -1,0 +1,2 @@
+/usr/bin/ar qc libRTreeLibd.a  CMakeFiles/RTreeLib.dir/RTree.cpp.o CMakeFiles/RTreeLib.dir/LinearSplit.cpp.o CMakeFiles/RTreeLib.dir/GreeneSplit.cpp.o CMakeFiles/RTreeLib.dir/Rectangle.cpp.o CMakeFiles/RTreeLib.dir/IOControl.cpp.o
+/usr/bin/ranlib libRTreeLibd.a

@@ -17,6 +17,7 @@ private:
 
     SplitHeuristic *splitHeuristic;
     std::string rootFilename;
+    void Rsearch(Rectangle &rectangle, std::vector<int> &found);
 
 public:
 
