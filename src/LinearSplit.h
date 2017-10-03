@@ -5,10 +5,11 @@
 #ifndef tarea1_logaritmos_LINEARSPLIT_H
 #define tarea1_logaritmos_LINEARSPLIT_H
 
+
 #include "SplitHeuristic.h"
 
 class LinearSplit : SplitHeuristic {
-    void split() override;
+    std::pair<vRect, vRect> split(vRect &) override ;
 };
 
 

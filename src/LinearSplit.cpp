@@ -4,6 +4,6 @@
 
 #include "LinearSplit.h"
 
-void LinearSplit::split() {
+std::pair<vRect, vRect> LinearSplit::split(vRect &vRect) {
 
 }

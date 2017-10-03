@@ -14,11 +14,13 @@
 class RTree{
 private:
     vRect node;
-    bool isLeaf = true;
-    SplitHeuristic *splitHeuristic;
-    std::string rootFilename;
-    void Rsearch(Rectangle &rectangle, std::vector<int> &found);
 
+  bool isLeaf = true;
+  SplitHeuristic *splitHeuristic;
+  std::string rootFilename;
+  void Rsearch(Rectangle &rectangle, std::vector<int> &found);
+  template <class Archive> friend void boost::serialization::serialize(Archive &, RTree &,
+                                                                                 const unsigned int);
 public:
 
     RTree(SplitHeuristic *splitHeuristic, std::string rootFilename);
@@ -27,5 +29,20 @@ public:
 
     std::vector<int> insert(Rectangle &rectangle);
 };
+
+
+
+namespace boost{
+  namespace serialization{
+    template<class Archive>
+    void serialize(Archive &ar, RTree &rTree, const unsigned int version) {
+      ar & rTree.node;
+      ar & rTree.rootFilename;
+      ar & rTree.isLeaf;
+    }
+  }
+}
+
+
 
 #endif //tarea1_logaritmos_RTREE_H
