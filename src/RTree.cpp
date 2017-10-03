@@ -35,7 +35,8 @@ void RTree::Rsearch(Rectangle &rectangle, std::vector<int> &found) {
         }
         else{
           std::string fname = node_rect.address;
-          IOControl::saveRTree(*this, "test.txt");
+          IOControl::saveRTree(*this, "rtree" + std::to_string(save_number) + ".txt");
+          save_number++;
           RTree next_rtree = IOControl::getRTree(fname);
           next_rtree.Rsearch(rectangle, found);
         }

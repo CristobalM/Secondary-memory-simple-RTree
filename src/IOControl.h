@@ -21,5 +21,6 @@ public:
 
 };
 
+extern int save_number = 0;
 
 #endif //LOGARITMOS_TAREA1_IOCONTROL_H
