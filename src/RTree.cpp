@@ -37,7 +37,7 @@ void RTree::Rsearch(Rectangle &rectangle, std::vector<int> &found) {
     } else {
       for (auto &node_rect : this->node) {
         if (intersect(node_rect, rectangle)) {
-          std::string current_name = "rtree" + std::to_string(save_number) + ".txt"
+          std::string current_name = "rtree" + std::to_string(save_number) + ".txt";
           std::string next_name = node_rect.address;
           IOControl::saveRTree(*this, current_name);
           save_number++;
