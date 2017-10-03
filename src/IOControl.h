@@ -15,8 +15,11 @@ private:
 public:
     static void saveVRect(vRect vrect, std::string fname);
     static vRect getVRect(std::string fname);
+    static void saveRTree(RTree vrect, std::string fname);
+    static RTree getRTree(std::string fname);
 
 };
 
+extern int save_number = 0;
 
 #endif //LOGARITMOS_TAREA1_IOCONTROL_H

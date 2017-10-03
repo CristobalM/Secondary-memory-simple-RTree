@@ -15,6 +15,7 @@ class RTree{
 private:
   vRect node;
   std::string inputFilename;
+  bool isLeaf = true;
   SplitHeuristic *splitHeuristic;
   std::string rootFilename;
 public:
