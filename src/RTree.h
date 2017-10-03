@@ -14,7 +14,7 @@
 class RTree{
 private:
     vRect node;
-
+    bool isLeaf = true;
     SplitHeuristic *splitHeuristic;
     std::string rootFilename;
     void Rsearch(Rectangle &rectangle, std::vector<int> &found);

@@ -27,18 +27,23 @@ std::vector<int> RTree::insert(Rectangle &rectangle) {
 }
 
 void RTree::Rsearch(Rectangle &rectangle, std::vector<int> &found) {
-    for (auto &node_rect : this->node)
+    if (this->isLeaf)
     {
-      if (intersect(node_rect, rectangle)){
-        if (node_rect.isLeaf){
+      for (auto &node_rect : this->node) {
+        if (intersect(node_rect, rectangle)) {
           found.push_back(atoi(node_rect.address));
         }
-        else{
-          std::string fname = node_rect.address;
-          IOControl::saveRTree(*this, "rtree" + std::to_string(save_number) + ".txt");
+      }
+    } else {
+      for (auto &node_rect : this->node) {
+        if (intersect(node_rect, rectangle)) {
+          std::string current_name = "rtree" + std::to_string(save_number) + ".txt"
+          std::string next_name = node_rect.address;
+          IOControl::saveRTree(*this, current_name);
           save_number++;
-          RTree next_rtree = IOControl::getRTree(fname);
+          RTree next_rtree = IOControl::getRTree(next_name);
           next_rtree.Rsearch(rectangle, found);
+          *this = IOControl::getRTree(current_name);
         }
       }
     }

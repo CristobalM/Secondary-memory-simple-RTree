@@ -10,6 +10,11 @@
 --   regex
 --   chrono
 --   atomic
+CMake Error at test/CMakeLists.txt:2 (add_subdirectory):
+  add_subdirectory given source "libs/googletest/googletest" which is not an
+  existing directory.
+
+
 -- Boost version: 1.54.0
 -- Found the following Boost libraries:
 --   date_time
@@ -17,6 +22,6 @@
 --   wserialization
 --   system
 --   serialization
--- Configuring done
--- Generating done
--- Build files have been written to: /home/splatt/logaritmos_tarea1/cmake-build-debug
+-- Configuring incomplete, errors occurred!
+See also "/home/splatt/logaritmos_tarea1/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "/home/splatt/logaritmos_tarea1/cmake-build-debug/CMakeFiles/CMakeError.log".
