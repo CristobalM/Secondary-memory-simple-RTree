@@ -12,7 +12,24 @@ bool intersect(Rectangle &r1, Rectangle&r2){
         (r2.y1 > r1.y2));
 }
 
-RTree::RTree(SplitHeuristic *splitHeuristic, std::string rootFilename) : rootFilename(rootFilename) {}
+RTree::RTree(SplitHeuristic *splitHeuristic, std::string rootFilename, std::string parentFilename,
+             int parentRectangleIndex, int memorySize) :  splitHeuristic(splitHeuristic),
+                                                          rootFilename(rootFilename),
+                                                          parentFilename(parentFilename),
+                                                          parentRectangleIndex(parentRectangleIndex),
+                                                          M(memorySize) {
+
+}
+RTree::RTree(SplitHeuristic *splitHeuristic, std::string rootFilename, int memorySize) :
+  RTree(splitHeuristic, rootFilename, nullptr, -1, memorySize)
+{}
+
+
+RTree::RTree(SplitHeuristic *splitHeuristic, std::string rootFilename) : RTree(splitHeuristic, rootFilename, defaultMemorySize) {
+}
+
+
+
 
 std::vector<int> RTree::search(Rectangle &rectangle) {
     std::vector<int> found;

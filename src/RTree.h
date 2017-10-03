@@ -11,25 +11,27 @@
 #include "SplitHeuristic.h"
 #include "commontypes.h"
 
+const int defaultMemorySize = 1000000;
+
 class RTree{
 private:
-    vRect node;
-
+  vRect node;
   bool isLeaf = true;
   SplitHeuristic *splitHeuristic;
   std::string rootFilename;
+  std::string parentFilename;
+  int parentRectangleIndex;
   void Rsearch(Rectangle &rectangle, std::vector<int> &found);
-  template <class Archive> friend void boost::serialization::serialize(Archive &, RTree &,
-                                                                                 const unsigned int);
+  template <class Archive> friend void boost::serialization::serialize(Archive &, RTree &, const unsigned int);
+  int M;
 public:
-
+    RTree(SplitHeuristic *splitHeuristic, std::string rootFilename, std::string parentFilename, int parentRectangleIndex, int memorySize);
+    RTree(SplitHeuristic *splitHeuristic, std::string rootFilename, int memorySize);
     RTree(SplitHeuristic *splitHeuristic, std::string rootFilename);
 
     std::vector<int> search(Rectangle &rectangle);
 
     std::vector<int> insert(Rectangle &rectangle);
-};
-
 
 
 namespace boost{
@@ -39,9 +41,15 @@ namespace boost{
       ar & rTree.node;
       ar & rTree.rootFilename;
       ar & rTree.isLeaf;
+      ar & rTree.parentFilename;
+      ar & rTree.parentRectangleIndex;
     }
   }
 }
+
+};
+
+
 
 
 
