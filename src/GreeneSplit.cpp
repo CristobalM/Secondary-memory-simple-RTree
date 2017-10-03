@@ -4,6 +4,6 @@
 
 #include "GreeneSplit.h"
 
-void GreeneSplit::split() {
+std::pair<vRect, vRect> GreeneSplit::split(vRect &vRect) {
 
 }

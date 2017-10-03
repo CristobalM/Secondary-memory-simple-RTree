@@ -8,7 +8,7 @@
 TEST(IOControlTest, WriteSerialization) {
   vRect vrect;
   std::string yes("yes");
-  Rectangle someRect(0, 0, 0, 1, yes , true);
+  Rectangle someRect(0, 0, 0, 1, yes);
   vrect.push_back(someRect);
   IOControl::saveVRect(vrect, "hola");
   vRect vrectget;
@@ -19,5 +19,4 @@ TEST(IOControlTest, WriteSerialization) {
   EXPECT_EQ(vrect[0].y1, 0);
   EXPECT_EQ(vrect[0].y2, 1);
   EXPECT_EQ(vrect[0].address, "yes");
-  EXPECT_EQ(vrect[0].isLeaf, true);
 }

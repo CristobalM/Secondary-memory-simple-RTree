@@ -1,17 +1,16 @@
 //
-// Created by Cristobal M on 9/26/17.
+// Created by Cristobal M on 10/3/17.
 //
 
-#ifndef tarea1_logaritmos_SPLITHEURISTIC_H
-#define tarea1_logaritmos_SPLITHEURISTIC_H
+#ifndef LOGARITMOS_TAREA1_SPLITHEURISTIC_H
+#define LOGARITMOS_TAREA1_SPLITHEURISTIC_H
 
 
-#include "RTree.h"
+#include "commontypes.h"
 
 class SplitHeuristic {
-public:
-    virtual void split(RTree &rTree) = 0;
+  virtual std::pair<vRect, vRect> split(vRect &) = 0;
 };
 
 
-#endif //tarea1_logaritmos_SPLITHEURISTIC_H
+#endif //LOGARITMOS_TAREA1_SPLITHEURISTIC_H
