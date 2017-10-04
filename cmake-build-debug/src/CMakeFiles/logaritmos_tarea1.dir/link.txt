@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/logaritmos_tarea1.dir/main.cpp.o  -o logaritmos_tarea1 libRTreeLib.a /usr/lib/x86_64-linux-gnu/libboost_serialization.so 

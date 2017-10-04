@@ -112,15 +112,5 @@ float SplitHeuristic::areaIncrease(Rectangle &dst, Rectangle &src) {
 }
  */
 
-float SplitHeuristic::areaIncrease(Rectangle &dst, Rectangle &src) {
-  float leftX = std::min(dst.x1, src.x1);
-  float rightX = std::max(dst.x2, dst.x2);
-  float bottomY = std::min(dst.x1, src.x1);
-  float topY = std::max(dst.x2, dst.x2);
 
-  float rectArea = (dst.x2 - dst.x1) * (dst.y2 - dst.y1);
-  float incToArea = (rightX - leftX) * (topY - bottomY);
-
-  return incToArea - rectArea;
-}
 

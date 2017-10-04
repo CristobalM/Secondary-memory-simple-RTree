@@ -22,3 +22,16 @@ Rectangle Rectangle::MBR(Rectangle &rectangle1, Rectangle &rectangle2) {
 }
 
 Rectangle::Rectangle() = default;
+
+
+float Rectangle::areaIncrease(Rectangle &src) {
+  float leftX = std::min(this->x1, src.x1);
+  float rightX = std::max(this->x2, this->x2);
+  float bottomY = std::min(this->x1, src.x1);
+  float topY = std::max(this->x2, this->x2);
+
+  float rectArea = (this->x2 - this->x1) * (this->y2 - this->y1);
+  float incToArea = (rightX - leftX) * (topY - bottomY);
+
+  return incToArea - rectArea;
+}

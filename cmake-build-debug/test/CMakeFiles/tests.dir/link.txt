@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/tests.dir/IOControlTest.cpp.o  -o tests ../src/libRTreeLib.a libs/googletest/googletest/libgtestd.a libs/googletest/googletest/libgtest_maind.a /usr/lib/x86_64-linux-gnu/libboost_serialization.so libs/googletest/googletest/libgtestd.a -pthread 

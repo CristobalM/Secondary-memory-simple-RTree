@@ -18,11 +18,11 @@ void RTree::insert(Rectangle &rectangle) {
          *}*/
         this->node.push_back(rectangle);
     } else {
-        Rectangle min_rectangle = NULL;
+        Rectangle min_rectangle = nullptr;
         float req_gr = std::numeric_limits<float>::max();
         float area = std::numeric_limits<float>::max();
         for (auto &node_rect : this->node) {
-            float new_req_gr = required_growth(node_rect, rectangle);
+            float new_req_gr = node_rect.areaIncrease(rectangle);
             float new_area = Rectangle::getArea(node_rect);
                 if (new_req_gr < req_gr){
                     area = new_area;

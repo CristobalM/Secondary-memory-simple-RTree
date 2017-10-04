@@ -18,8 +18,8 @@ std::pair<vRect, vRect> LinearSplit::split(vRect &vRect, std::string parentFilen
 
   for(long selectedIndex : randomPermutation){
     Rectangle &selectedRect = vRect[selectedIndex];
-    float toIncreaseArea1 = areaIncrease(rect1, selectedRect);
-    float toIncreaseArea2 = areaIncrease(rect2, selectedRect);
+    float toIncreaseArea1 = Rectangle::areaIncrease(rect1, selectedRect);
+    float toIncreaseArea2 = Rectangle::areaIncrease(rect2, selectedRect);
     if(toIncreaseArea1 <= toIncreaseArea2){
       node1.push_back(selectedRect);
     }
