@@ -8,28 +8,48 @@
 
 #include <vector>
 #include "Rectangle.h"
-#include "SplitHeuristic.h"
 #include "commontypes.h"
 
 class RTree{
+  friend class RTreeController;
 private:
   vRect node;
+  bool leaf = true;
+public:
+  bool isLeaf() const;
+
+private:
   std::string inputFilename;
-  bool isLeaf = true;
-  SplitHeuristic *splitHeuristic;
-  std::string rootFilename;
+  std::string parentFilename;
+  int parentRectangleIndex;
+
+  template<class Archive>
+  friend void boost::serialization::serialize(Archive &, RTree &, const unsigned int);
+
 public:
 
-  RTree(SplitHeuristic * splitHeuristic, std::string inputFilename);
-
-  std::vector<int> search(Rectangle &rectangle);
-
-  void insert(Rectangle &rectangle);
+  const std::string &getInputFilename() const;
 
 
-  const vRect &getNode() const;
+  RTree(std::string inputFilename);
 
-  float required_growth(Rectangle &rectangle1, Rectangle &rectangle2);
+  //void insert(Rectangle &rectangle);
+
+  //float required_growth(Rectangle &rectangle1, Rectangle &rectangle2);
 };
+
+namespace boost{
+  namespace serialization{
+    template<class Archive>
+    void serialize(Archive &ar, RTree &rTree, const unsigned int version) {
+      ar & rTree.node;
+      ar & rTree.leaf;
+      ar & rTree.parentFilename;
+      ar & rTree.parentRectangleIndex;
+    }
+
+
+  }
+}
 
 #endif //tarea1_logaritmos_RTREE_H

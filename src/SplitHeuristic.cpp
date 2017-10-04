@@ -87,30 +87,3 @@ std::vector<long> SplitHeuristic::fisherYatesVariation(long result_size, long ch
   return result;
 }
 
-/*
-float SplitHeuristic::areaIncrease(Rectangle &dst, Rectangle &src) {
-  float xInc, yInc;
-  if(src.x1 <= dst.x1 ){
-    xInc = (float) std::max(0.0,  dst.x1 - src.x1);
-  }
-  else{
-    xInc = (float) std::max(0.0, src.x2 - dst.x2);
-  }
-
-  if(src.y1 <= dst.y2){
-    yInc = (float) std::max(0.0, dst.y1 - src.y1);
-  }
-  else{
-    yInc = (float) std::max(0.0, src.y2 - dst.y2);
-  }
-  float rectDeltaX = (dst.x2 - dst.x1);
-  float rectDeltaY = (dst.y2 - dst.y1);
-  float rectArea = rectDeltaX * rectDeltaY;
-  float incToArea = (rectDeltaX + xInc) * (rectDeltaY + yInc);
-
-  return incToArea - rectArea;
-}
- */
-
-
-

@@ -23,6 +23,14 @@ Rectangle Rectangle::MBR(Rectangle &rectangle1, Rectangle &rectangle2) {
 
 Rectangle::Rectangle() = default;
 
+RectContainer findMBR(Rectangle &rect1, Rectangle &rect2){
+  RectContainer out;
+  out.leftX = std::min(rect1.x1, rect2.x1);
+  out.rightX = std::max(rect1.x2, rect1.x2);
+  out.bottomY = std::min(rect1.x1, rect2.x1);
+  out.topY = std::max(rect1.x2, rect1.x2);
+  return out;
+}
 
 float Rectangle::areaIncrease(Rectangle &src) {
   float leftX = std::min(this->x1, src.x1);
@@ -34,4 +42,22 @@ float Rectangle::areaIncrease(Rectangle &src) {
   float incToArea = (rightX - leftX) * (topY - bottomY);
 
   return incToArea - rectArea;
+}
+
+bool Rectangle::intersect(Rectangle &otherRect) {
+    return !((this->x1 > otherRect.x2) or
+             (this->y1 > otherRect.y2) or
+             (otherRect.x1 > this->x2) or
+             (otherRect.y1 > this->y2));
+}
+
+Rectangle Rectangle::deriveParent(std::string childaddr) {
+  return Rectangle(x1, x2, y1, y2, childaddr, false);
+}
+
+void Rectangle::enlargeToContain(Rectangle &src) {
+  float leftX = std::min(this->x1, src.x1);
+  float rightX = std::max(this->x2, this->x2);
+  float bottomY = std::min(this->x1, src.x1);
+  float topY = std::max(this->x2, this->x2);
 }

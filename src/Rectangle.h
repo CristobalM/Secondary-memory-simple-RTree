@@ -15,11 +15,21 @@ public:
   Rectangle();
   Rectangle(float x1, float x2, float y1, float y2, std::string &address, bool isLeaf);
 
+  Rectangle deriveParent(std::string childaddr);
+
   static float getArea(Rectangle &rectangle);
 
   static Rectangle MBR(Rectangle &rectangle1, Rectangle &rectangle2);
 
+
+  bool intersect(Rectangle &otherRect);
+
   float areaIncrease(Rectangle &src);
+  void enlargeToContain(Rectangle &src);
+};
+
+struct RectContainer{
+  float leftX, rightX, bottomY, topY;
 };
 
 

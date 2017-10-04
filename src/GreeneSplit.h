@@ -9,7 +9,7 @@
 #include "SplitHeuristic.h"
 
 class GreeneSplit : SplitHeuristic {
-  std::pair<vRect, vRect> split(vRect &) override ;
+  std::pair<vRect, vRect> split(vRect &, std::string, int) override ;
 };
 
 

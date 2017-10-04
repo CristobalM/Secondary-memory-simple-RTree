@@ -32,7 +32,7 @@ void IOControl::saveRTree(RTree rtree, std::string fname) {
 }
 
 RTree IOControl::getRTree(std::string fname) {
-    RTree out(NULL, "");
+    RTree out;
     std::ifstream ifs(fname);
 
     boost::archive::text_iarchive ia(ifs);
