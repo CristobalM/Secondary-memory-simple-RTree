@@ -10,6 +10,8 @@
 
 class GreeneSplit : SplitHeuristic {
   std::pair<vRect, vRect> split(vRect &) override ;
+
+  std::pair<vRect, vRect> split(vRect &vRect, std::string parentFilename, int parentRectangleIndex);
 };
 
 

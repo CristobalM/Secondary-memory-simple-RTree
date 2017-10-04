@@ -1,0 +1,18 @@
+/opt/clion-2017.2.2/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/splatt/logaritmos_tarea1
+-- Boost version: 1.54.0
+-- Found the following Boost libraries:
+--   serialization
+-- Found PythonInterp: /usr/bin/python (found version "2.7.6") 
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE  
+-- Boost version: 1.54.0
+-- Found the following Boost libraries:
+--   serialization
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/splatt/logaritmos_tarea1/cmake-build-debug
