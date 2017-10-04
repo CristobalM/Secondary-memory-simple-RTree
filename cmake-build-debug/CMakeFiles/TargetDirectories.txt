@@ -1,0 +1,13 @@
+/home/splatt/logaritmos_tarea1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/splatt/logaritmos_tarea1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/splatt/logaritmos_tarea1/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
+/home/splatt/logaritmos_tarea1/cmake-build-debug/src/CMakeFiles/edit_cache.dir
+/home/splatt/logaritmos_tarea1/cmake-build-debug/src/CMakeFiles/logaritmos_tarea1.dir
+/home/splatt/logaritmos_tarea1/cmake-build-debug/src/CMakeFiles/RTreeLib.dir
+/home/splatt/logaritmos_tarea1/cmake-build-debug/test/CMakeFiles/rebuild_cache.dir
+/home/splatt/logaritmos_tarea1/cmake-build-debug/test/CMakeFiles/edit_cache.dir
+/home/splatt/logaritmos_tarea1/cmake-build-debug/test/CMakeFiles/tests.dir
+/home/splatt/logaritmos_tarea1/cmake-build-debug/test/libs/googletest/googletest/CMakeFiles/edit_cache.dir
+/home/splatt/logaritmos_tarea1/cmake-build-debug/test/libs/googletest/googletest/CMakeFiles/gtest_main.dir
+/home/splatt/logaritmos_tarea1/cmake-build-debug/test/libs/googletest/googletest/CMakeFiles/rebuild_cache.dir
+/home/splatt/logaritmos_tarea1/cmake-build-debug/test/libs/googletest/googletest/CMakeFiles/gtest.dir

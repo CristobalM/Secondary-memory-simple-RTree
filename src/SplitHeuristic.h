@@ -10,7 +10,7 @@
 
 class SplitHeuristic {
 protected:
-  virtual std::pair<vRect, vRect> split(vRect &, std::string, int) = 0;
+  virtual void split(vRect &) = 0;
   std::pair<int, int> mostDistantPair(vRect &);
   std::vector<long> fisherYatesVariation(long result_size, long choice_set_size);
   float areaIncrease(Rectangle &dst, Rectangle &src);
