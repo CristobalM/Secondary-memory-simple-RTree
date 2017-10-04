@@ -8,6 +8,7 @@
 
 
 #include "commontypes.h"
+#include "RTree.h"
 
 struct splittedNode{
   vRect left, right;
@@ -16,9 +17,11 @@ struct splittedNode{
 
 class SplitHeuristic {
 protected:
-  virtual splittedNode split(vRect &vrect, std::string parentFilename, int parentRectangleIndex) = 0;
+  virtual splittedNode split(vRect &vrect) = 0;
   std::pair<int, int> mostDistantPair(vRect &);
   std::vector<long> fisherYatesVariation(long result_size, long choice_set_size);
+
+  void splitNode(RTree &rtree);
 };
 
 

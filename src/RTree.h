@@ -12,26 +12,24 @@
 
 class RTree{
   friend class RTreeController;
-private:
+public:
   vRect node;
   bool leaf = true;
-public:
-  bool isLeaf() const;
 
-private:
-  std::string inputFilename;
-  std::string parentFilename;
+  int inputFilenameIndex;
+  int parentFilenameIndex;
   int parentRectangleIndex;
 
   template<class Archive>
   friend void boost::serialization::serialize(Archive &, RTree &, const unsigned int);
 
-public:
+  bool isLeaf() const;
 
-  const std::string &getInputFilename() const;
+  int &getInputFilenameIndex() const;
 
 
-  RTree(std::string inputFilename);
+  RTree(vRect &node, int inputFilenameIndex, bool leaf, int parentFilenameIndex, int parentRectangleIndex);
+  RTree(int inputFilenameIndex);
 
   //void insert(Rectangle &rectangle);
 
@@ -44,9 +42,10 @@ namespace boost{
     void serialize(Archive &ar, RTree &rTree, const unsigned int version) {
       ar & rTree.node;
       ar & rTree.leaf;
-      ar & rTree.parentFilename;
+      ar & rTree.parentFilenameIndex;
       ar & rTree.parentRectangleIndex;
     }
+
 
 
   }

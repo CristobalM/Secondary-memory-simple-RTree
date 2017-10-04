@@ -9,7 +9,8 @@
 #include "SplitHeuristic.h"
 
 class LinearSplit : SplitHeuristic {
-    splittedNode split(vRect &vrect, std::string parentFilename, int parentRectangleIndex) override ;
+public:
+    splittedNode split(vRect &vrect) override ;
 };
 
 

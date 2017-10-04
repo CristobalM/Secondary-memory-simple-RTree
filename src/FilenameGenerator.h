@@ -12,6 +12,7 @@ private:
   static int index = 0;
 public:
   static std::string generateNewFilename();
+  static std::string getStringFromIndex(int index);
 
 };
 

@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include "RTreeController.h"
 #include "IOControl.h"
-
+#include "FilenameGenerator.h"
 
 
 std::vector<int> RTreeController::search(RTree &rtree, Rectangle &rectangle) {
@@ -19,16 +19,15 @@ void RTreeController::Rsearch(RTree &rtree, Rectangle &rectangle, std::vector<in
   {
     for (auto &node_rect : rtree.node) {
       if (node_rect.intersect(rectangle)) {
-        found.push_back(atoi(node_rect.address));
+        found.push_back(node_rect.address);
       }
     }
   } else {
     for (auto &node_rect : rtree.node) {
       if (node_rect.intersect(rectangle)) {
-        std::string current_name = rtree.getInputFilename(); //"rtree" + std::to_string(save_number) + ".txt";
-        std::string next_name = node_rect.address;
+        std::string current_name = FilenameGenerator::getStringFromIndex(rtree.getInputFilenameIndex()); //"rtree" + std::to_string(save_number) + ".txt";
+        std::string next_name = FilenameGenerator::getStringFromIndex(node_rect.address);
         IOControl::saveRTree(rtree, current_name);
-        //save_number++;
         rtree = IOControl::getRTree(next_name);
         Rsearch(rtree, rectangle, found);
         rtree = IOControl::getRTree(current_name);
@@ -37,12 +36,11 @@ void RTreeController::Rsearch(RTree &rtree, Rectangle &rectangle, std::vector<in
   }
 }
 
+template<class Heuristic>
 void RTreeController::insert(Rectangle &rectangle) {
     if (currentNode.leaf){
-        /*if (this->node.length()== M){
-         *  llamar a la heuristica
-         *}*/
       currentNode.node.push_back(rectangle);
+      Heuristic::splitNode(currentNode);
     } else {
         Rectangle min_rectangle;
         float req_gr = std::numeric_limits::max();
@@ -68,12 +66,11 @@ void RTreeController::insert(Rectangle &rectangle) {
                     }
                 }
         }
-        std::string next_name = min_rectangle.address;
-        IOControl::saveRTree(currentNode, currentNode.getInputFilename());
+        std::string next_name = FilenameGenerator::getStringFromIndex(min_rectangle.address);
+        IOControl::saveRTree(currentNode, FilenameGenerator::getStringFromIndex(currentNode.getInputFilenameIndex()));
         currentNode = IOControl::getRTree(next_name);
         insert(rectangle);
     }
-
 }
 
 

@@ -11,9 +11,9 @@
 class Rectangle{
 public:
   float x1, x2, y1, y2;
-  std::string address;
+  int address;
   Rectangle();
-  Rectangle(float x1, float x2, float y1, float y2, std::string &address, bool isLeaf);
+  Rectangle(float x1, float x2, float y1, float y2, std::string address, bool isLeaf);
 
   Rectangle deriveParent(std::string childaddr);
 

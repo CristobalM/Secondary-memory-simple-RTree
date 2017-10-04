@@ -3,8 +3,10 @@
 //
 
 #include "Rectangle.h"
+#include "commontypes.h"
+#include "FilenameGenerator.h"
 
-Rectangle::Rectangle(float x1, float x2, float y1, float y2, std::string &address, bool isLeaf) :
+Rectangle::Rectangle(float x1, float x2, float y1, float y2, std::string address, bool isLeaf) :
   x1(x1), x2(x2), y1(y1), y2(y2), address(address) {}
 
 float Rectangle::getArea(Rectangle &rectangle) {
@@ -19,6 +21,33 @@ RectContainer findMBR(Rectangle &rect1, Rectangle &rect2){
   out.rightX = std::max(rect1.x2, rect1.x2);
   out.bottomY = std::min(rect1.x1, rect2.x1);
   out.topY = std::max(rect1.x2, rect1.x2);
+  return out;
+}
+
+RectContainer findMBR(vRect &vrect){
+  float minX1, minY1;
+  minX1 = minY1 = std::numeric_limits::infinity();
+  float maxX2, maxY2;
+  maxX2 = maxY2 = -std::numeric_limits::infinity();
+  for (auto &rect : vrect){
+    if (rect.x1 < minX1){
+      minX1 = rect.x1;
+    }
+    if (rect.x2 > maxX2){
+      maxX2 = rect.x2;
+    }
+    if (rect.y1 < minY1){
+      minY1 = rect.y1;
+    }
+    if (rect.y2 > maxY2){
+      maxY2 = rect.y2;
+    }
+  }
+  RectContainer out;
+  out.leftX = minX1;
+  out.rightX = maxX2;
+  out.bottomY = minY1;
+  out.topY = maxY2;
   return out;
 }
 

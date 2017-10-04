@@ -6,6 +6,10 @@
 #include "FilenameGenerator.h"
 
 std::string FilenameGenerator::generateNewFilename() {
-    return "rtree" + std::to_string(index++) + ".txt";
-  }
+  return "rtree" + std::to_string(index++) + ".txt";
+}
+
+std::string FilenameGenerator::getStringFromIndex(int index) {
+  return "rtree" + std::to_string(index) + ".txt";
+}
 
