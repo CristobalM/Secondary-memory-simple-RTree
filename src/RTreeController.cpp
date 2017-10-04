@@ -77,6 +77,8 @@ void RTreeController::insert(Rectangle &rectangle) {
 }
 
 
-RTreeController::RTreeController(std::string rootFilename) :
-  rootFilename(rootFilename),
-  currentNode(IOControl::getRTree(rootFilename)){}
+RTreeController::RTreeController(std::string rootFilename) : RTreeController(rootFilename, DEFAULT_MEMORY_SIZE){}
+
+RTreeController::RTreeController(std::string rootFilename, int memorySize) : rootFilename(rootFilename),
+                                                                            currentNode(IOControl::getRTree(rootFilename)),
+                                                                            memorySize(memorySize) {}

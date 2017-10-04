@@ -2,9 +2,6 @@
 #include <vector>
 #include "Rectangle.h"
 
-const int M = 1000;
-
-
 
 Rectangle *rectangle;
 

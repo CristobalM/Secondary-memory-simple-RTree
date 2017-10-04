@@ -6,11 +6,17 @@
 #define LOGARITMOS_TAREA1_SPLITHEURISTIC_H
 
 
+
 #include "commontypes.h"
+
+struct splittedNode{
+  vRect left, right;
+  Rectangle leftParent, rightParent;
+};
 
 class SplitHeuristic {
 protected:
-  virtual std::pair<vRect, vRect> split(vRect &, std::string, int) = 0;
+  virtual splittedNode split(vRect &vrect, std::string parentFilename, int parentRectangleIndex) = 0;
   std::pair<int, int> mostDistantPair(vRect &);
   std::vector<long> fisherYatesVariation(long result_size, long choice_set_size);
 };

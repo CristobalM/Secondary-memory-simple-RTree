@@ -1,5 +1,5 @@
 
-set(SOURCE_FILES  RTree.cpp RTree.h LinearSplit.cpp LinearSplit.h GreeneSplit.cpp GreeneSplit.h Rectangle.cpp Rectangle.h IOControl.cpp IOControl.h commontypes.h SplitHeuristic.h RTreeController.cpp RTreeController.h SplitBuilder.cpp SplitBuilder.h FilenameGenerator.cpp FilenameGenerator.h)
+set(SOURCE_FILES  RTree.cpp RTree.h LinearSplit.cpp LinearSplit.h GreeneSplit.cpp GreeneSplit.h Rectangle.cpp Rectangle.h IOControl.cpp IOControl.h commontypes.h SplitHeuristic.cpp SplitHeuristic.h RTreeController.cpp RTreeController.h SplitBuilder.cpp SplitBuilder.h FilenameGenerator.cpp FilenameGenerator.h)
 add_library(RTreeLib ${SOURCE_FILES})
 
 

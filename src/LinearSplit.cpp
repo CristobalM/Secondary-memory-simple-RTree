@@ -16,7 +16,7 @@ void permutateVRect(vRect &which, std::vector<long> &permutation){
   }
 }
 
-std::pair<vRect, vRect> LinearSplit::split(vRect &vrect, std::string parentFilename, int parentRectangleIndex) {
+splittedNode LinearSplit::split(vRect &vrect, std::string parentFilename, int parentRectangleIndex) {
   vRect node1;
   vRect node2;
   std::pair<int,int> distantRects = mostDistantPair(vrect);
@@ -38,28 +38,14 @@ std::pair<vRect, vRect> LinearSplit::split(vRect &vrect, std::string parentFilen
     float toIncreaseArea1 = mbr1.areaIncrease(selectedRect);
     float toIncreaseArea2 = mbr2.areaIncrease(selectedRect);
     if(toIncreaseArea1 <= toIncreaseArea2){
-      //node1.push_back(selectedRect);
       splitBuilder.putLeft();
+      mbr1.enlargeToContain(selectedRect);
     }
     else{
       splitBuilder.putRight();
+      mbr2.enlargeToContain(selectedRect);
     }
   }
-
-  for(long selectedIndex : randomPermutation){
-    Rectangle &selectedRect = vrect[selectedIndex];
-    float toIncreaseArea1 = mbr1.areaIncrease(selectedRect);
-    float toIncreaseArea2 = mbr2.areaIncrease(selectedRect);
-    if(toIncreaseArea1 <= toIncreaseArea2){
-      node1.push_back(selectedRect);
-    }
-    else{
-      node2.push_back(selectedRect);
-    }
-  }
-
-
-
-
+  splittedNode out;
 
 }

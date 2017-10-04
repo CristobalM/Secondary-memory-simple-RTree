@@ -9,7 +9,9 @@
 #include "SplitHeuristic.h"
 
 class GreeneSplit : SplitHeuristic {
-  std::pair<vRect, vRect> split(vRect &, std::string, int) override ;
+public:
+  splittedNode split(vRect &vrect, std::string parentFilename, int parentRectangleIndex) override ;
+  bool horMostDistantDimension(vRect &vRect);
 };
 
 

@@ -9,15 +9,15 @@
 #include "commontypes.h"
 #include "SplitHeuristic.h"
 
-std::pair<int, int> SplitHeuristic::mostDistantPair(vRect &vRect) {
+std::pair<int, int> SplitHeuristic::mostDistantPair(vRect &vrect) {
   float minX, minY, minX1, minY1;
   minX = minY = minX1 = minY1 = std::numeric_limits::infinity();
   float maxX, maxY, maxX2, maxY2;
   maxX = maxY = maxX2 = maxY2 = -std::numeric_limits::infinity();
   int rightmostx1, leftmostx2, uppermosty1, lowermosty2;
   rightmostx1 = leftmostx2 = uppermosty1 = lowermosty2 = -1;
-  for(int i = 0; i < vRect.size(); i++){
-    Rectangle &rect = vRect[i];
+  for(int i = 0; i < vrect.size(); i++){
+    Rectangle &rect = vrect[i];
     if(maxX < rect.x1){
       maxX = rect.x1;
       rightmostx1 = i;
@@ -62,13 +62,13 @@ std::pair<int, int> SplitHeuristic::mostDistantPair(vRect &vRect) {
   return std::make_pair(lesserRect, mostRect);
 }
 
-bool SplitHeuristic::horMostDistantDimension(vRect &vRect) {
+bool SplitHeuristic::horMostDistantDimension(vRect &vrect) {
   float minX, minY, minX1, minY1;
   minX = minY = minX1 = minY1 = std::numeric_limits::infinity();
   float maxX, maxY, maxX2, maxY2;
   maxX = maxY = maxX2 = maxY2 = -std::numeric_limits::infinity();
-  for(int i = 0; i < vRect.size(); i++){
-    Rectangle &rect = vRect[i];
+  for(int i = 0; i < vrect.size(); i++){
+    Rectangle &rect = vrect[i];
     if(maxX < rect.x1){
       maxX = rect.x1;
     }

@@ -19,9 +19,6 @@ public:
 
   static float getArea(Rectangle &rectangle);
 
-  static Rectangle MBR(Rectangle &rectangle1, Rectangle &rectangle2);
-
-
   bool intersect(Rectangle &otherRect);
 
   float areaIncrease(Rectangle &src);

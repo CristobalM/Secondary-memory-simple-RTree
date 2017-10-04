@@ -19,6 +19,8 @@ public:
     static void saveRTree(RTree vrect, std::string fname);
     static RTree getRTree(std::string fname);
 
+    static void deleteFilename(std::string fname);
+
 };
 
 extern int save_number = 0;
