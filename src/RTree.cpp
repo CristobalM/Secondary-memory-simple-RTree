@@ -6,7 +6,7 @@
 #include "IOControl.h"
 
 bool intersect(Rectangle &r1, Rectangle&r2){
-    return ((r1.x1 > r2.x2) or
+    return !((r1.x1 > r2.x2) or
         (r1.y1 > r2.y2) or
         (r2.x1 > r1.x2) or
         (r2.y1 > r1.y2));
@@ -37,8 +37,8 @@ std::vector<int> RTree::search(Rectangle &rectangle) {
     return found;
 }
 
-std::vector<int> RTree::insert(Rectangle &rectangle) {
-    return std::vector<int>();
+void RTree::insert(Rectangle &rectangle) {
+
 }
 
 void RTree::Rsearch(Rectangle &rectangle, std::vector<int> &found) {

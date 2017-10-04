@@ -6,21 +6,25 @@
 #include "LinearSplit.h"
 
 
-std::pair<vRect, vRect> LinearSplit::split(vRect &vRect) {
-  vRect node1, node2;
+std::pair<vRect, vRect> LinearSplit::split(vRect &vRect, std::string parentFilename, int parentRectangleIndex) {
+  vRect node1;
+  vRect node2;
   std::pair<int,int> distantRects = mostDistantPair(vRect);
 
   Rectangle &rect1 = vRect[distantRects.first];
   Rectangle &rect2 = vRect[distantRects.second];
 
-  std::vector<long> randomPermutation = fisherYatesVariation(vRect.size()-2, vRect.size()-2);
+  std::vector<long> randomPermutation = fisherYatesVariation(vRect.size(), vRect.size());
 
-  for(long selectedIndex :  randomPermutation){
-    if(selectedIndex == distantRects.first) {
-      selectedIndex = vRect.size() - 1;
+  for(long selectedIndex : randomPermutation){
+    Rectangle &selectedRect = vRect[selectedIndex];
+    float toIncreaseArea1 = areaIncrease(rect1, selectedRect);
+    float toIncreaseArea2 = areaIncrease(rect2, selectedRect);
+    if(toIncreaseArea1 <= toIncreaseArea2){
+      node1.push_back(selectedRect);
     }
-    else if(selectedIndex == distantRects.second) {
-      selectedIndex = vRect.size() - 2;
+    else{
+      node2.push_back(selectedRect);
     }
   }
 
