@@ -24,10 +24,12 @@ public:
 
   std::vector<int> search(Rectangle &rectangle);
 
-  std::vector<int> insert(Rectangle &rectangle);
+  void insert(Rectangle &rectangle);
 
 
   const vRect &getNode() const;
+
+  float required_growth(Rectangle &rectangle1, Rectangle &rectangle2);
 };
 
 #endif //tarea1_logaritmos_RTREE_H

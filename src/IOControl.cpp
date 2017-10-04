@@ -5,6 +5,7 @@
 #include <fstream>
 #include <boost/serialization/vector.hpp>
 #include "IOControl.h"
+#include "RTree.h"
 
 void IOControl::saveVRect(vRect vrect, std::string fname) {
     std::ofstream ofs(fname);

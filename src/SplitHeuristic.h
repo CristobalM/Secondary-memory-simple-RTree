@@ -1,17 +1,21 @@
 //
-// Created by Cristobal M on 9/26/17.
+// Created by Cristobal M on 10/3/17.
 //
 
-#ifndef tarea1_logaritmos_SPLITHEURISTIC_H
-#define tarea1_logaritmos_SPLITHEURISTIC_H
+#ifndef LOGARITMOS_TAREA1_SPLITHEURISTIC_H
+#define LOGARITMOS_TAREA1_SPLITHEURISTIC_H
 
 
 #include "commontypes.h"
 
 class SplitHeuristic {
-public:
-    virtual void split(vRect &node) = 0;
+protected:
+  virtual void split(vRect &) = 0;
+  std::pair<int, int> mostDistantPair(vRect &);
+  std::vector<long> fisherYatesVariation(long result_size, long choice_set_size);
+  float areaIncrease(Rectangle &dst, Rectangle &src);
 };
 
 
-#endif //tarea1_logaritmos_SPLITHEURISTIC_H
+
+#endif //LOGARITMOS_TAREA1_SPLITHEURISTIC_H

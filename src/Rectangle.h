@@ -14,6 +14,10 @@ public:
   std::string address;
   Rectangle();
   Rectangle(float x1, float x2, float y1, float y2, std::string &address, bool isLeaf);
+
+  static float getArea(Rectangle &rectangle);
+
+  static Rectangle MBR(Rectangle &rectangle1, Rectangle &rectangle2);
 };
 
 
@@ -26,7 +30,6 @@ namespace boost{
       ar & rectangle.y1;
       ar & rectangle.y1;
       ar & rectangle.address;
-      ar & rectangle.isLeaf;
     }
   }
 }
