@@ -8,6 +8,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include "commontypes.h"
+#include "RTree.h"
 
 class IOControl {
 private:

@@ -11,23 +11,55 @@
 #include "SplitHeuristic.h"
 #include "commontypes.h"
 
-class RTree{
+const int defaultMemorySize = 1000000;
+
+class RTree {
 private:
   vRect node;
   std::string inputFilename;
   bool isLeaf = true;
   SplitHeuristic *splitHeuristic;
   std::string rootFilename;
-public:
+  std::string parentFilename;
+  int parentRectangleIndex;
 
-  RTree(SplitHeuristic * splitHeuristic, std::string inputFilename);
+  void Rsearch(Rectangle &rectangle, std::vector<int> &found);
+
+  template<class Archive>
+  friend void boost::serialization::serialize(Archive &, RTree &, const unsigned int);
+
+  int M;
+public:
+  RTree(SplitHeuristic *splitHeuristic, std::string rootFilename, std::string parentFilename, int parentRectangleIndex,
+        int memorySize);
+
+  RTree(SplitHeuristic *splitHeuristic, std::string rootFilename, int memorySize);
+
+  RTree(SplitHeuristic *splitHeuristic, std::string rootFilename);
 
   std::vector<int> search(Rectangle &rectangle);
 
-  std::vector<int> insert(Rectangle &rectangle);
-
-
-  const vRect &getNode() const;
+  void insert(Rectangle &rectangle);
 };
+
+
+namespace boost{
+  namespace serialization{
+    template<class Archive>
+    void serialize(Archive &ar, RTree &rTree, const unsigned int version) {
+      ar & rTree.node;
+      ar & rTree.rootFilename;
+      ar & rTree.isLeaf;
+      ar & rTree.parentFilename;
+      ar & rTree.parentRectangleIndex;
+    }
+  }
+}
+
+
+
+
+
+
 
 #endif //tarea1_logaritmos_RTREE_H
