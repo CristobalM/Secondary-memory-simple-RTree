@@ -62,10 +62,54 @@ std::pair<int, int> SplitHeuristic::mostDistantPair(vRect &vRect) {
   return std::make_pair(lesserRect, mostRect);
 }
 
+bool SplitHeuristic::horMostDistantDimension(vRect &vRect) {
+  float minX, minY, minX1, minY1;
+  minX = minY = minX1 = minY1 = std::numeric_limits::infinity();
+  float maxX, maxY, maxX2, maxY2;
+  maxX = maxY = maxX2 = maxY2 = -std::numeric_limits::infinity();
+  for(int i = 0; i < vRect.size(); i++){
+    Rectangle &rect = vRect[i];
+    if(maxX < rect.x1){
+      maxX = rect.x1;
+    }
+    if(minX > rect.x2){
+      minX = rect.x2;
+    }
+    if(maxY < rect.y1){
+      maxY = rect.y1;
+    }
+    if(minY > rect.y2){
+      minY = rect.y2;
+    }
+    if(minX1 > rect.x1){
+      minX1 = rect.x1;
+    }
+    if(maxX2 < rect.x2){
+      maxX2 = rect.x2;
+    }
+    if(minY1 > rect.y1){
+      minY1 = rect.y1;
+    }
+    if(maxY2 < rect.y2){
+      maxY2 = rect.y2;
+    }
+  }
+  float xDimSeparationNorm = std::abs(maxX - minX)/(maxX2 - minX1);
+  float yDimSeparationNorm = std::abs(maxY - minY)/(maxY2 - minY1);
+  if(xDimSeparationNorm >= yDimSeparationNorm){
+    return true;
+  }
+  return false;
+}
+
+
+
+
+
 std::vector<long> SplitHeuristic::fisherYatesVariation(long result_size, long choice_set_size) {
   std::vector<long> result;
   std::unordered_map<long, long> state;
-  std::srand((time(0));
+  std::srand(time(0));
 
   for(long i = 0; i < result_size; i++){
     long random_number = (std::rand() % (choice_set_size - i)) + i;
