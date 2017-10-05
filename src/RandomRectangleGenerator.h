@@ -14,7 +14,7 @@ private:
 
 public:
   void generateDataFile(int n);
-  int* generateRandomRect(std::default_random_engine generator);
+  int* generateRandomRect();
 };
 
 
