@@ -18,7 +18,10 @@ public:
 
   static RTree getRTree(std::string fname);
 
-  static vRect getVRect(std::string fname);
+    template <class Heuristic>
+    static int processInput(std::string fname);
+
+    //static void deleteFilename(std::string fname);
 
   static void saveVRect(vRect vrect, std::string fname);
 

@@ -3,7 +3,6 @@
 #include "Rectangle.h"
 
 
-Rectangle *rectangle;
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
