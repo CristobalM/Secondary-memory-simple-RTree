@@ -16,6 +16,5 @@ public:
 
 };
 
-int FilenameGenerator::index = 0;
 
 #endif //LOGARITMOS_TAREA1_FILENAMEGENERATOR_H

@@ -32,10 +32,9 @@ RTree IOControl::getRTree(std::string fname) {
 }
 
 
-template <class Heuristic>
-int IOControl::processInput(std::string fname) {
+int IOControl::processInput(std::string fname, SplitHeuristic *heuristic) {
     std::ifstream infile(fname);
-    RTreeController controller(FilenameGenerator::generateNewIndex());
+    RTreeController controller(FilenameGenerator::generateNewIndex(), heuristic);
     int index = 0;
     while (infile) {
         std::string s;
@@ -71,7 +70,7 @@ int IOControl::processInput(std::string fname) {
             count++;
         }
         Rectangle mbr(minX, maxX, minY, maxY, index, true);
-        controller.insert<Heuristic>(mbr);
+        controller.insert(mbr);
         index++;
     }
     if (!infile.eof()) {

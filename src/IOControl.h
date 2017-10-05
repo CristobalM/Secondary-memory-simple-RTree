@@ -9,6 +9,8 @@
 #include <boost/archive/text_iarchive.hpp>
 #include "commontypes.h"
 #include "RTree.h"
+#include "SplitHeuristic.h"
+
 
 class IOControl {
 private:
@@ -17,15 +19,13 @@ public:
 
 
   static RTree getRTree(std::string fname);
+  static void saveRTree(RTree rtree, std::string fname);
 
-    template <class Heuristic>
-    static int processInput(std::string fname);
+  static int processInput(std::string fname, SplitHeuristic *heuristic);
 
     //static void deleteFilename(std::string fname);
 
-  static void saveVRect(vRect vrect, std::string fname);
 
-  static void saveRTree(RTree rtree, std::string fname);
 };
 
 

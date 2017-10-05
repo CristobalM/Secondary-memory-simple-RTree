@@ -8,7 +8,7 @@
 
 #include "SplitHeuristic.h"
 
-class GreeneSplit : SplitHeuristic {
+class GreeneSplit : public SplitHeuristic {
 public:
   splittedNode split(vRect &vrect) override ;
   bool horMostDistantDimension(vRect &vRect);

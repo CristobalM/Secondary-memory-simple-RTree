@@ -65,9 +65,6 @@ std::pair<int, int> SplitHeuristic::mostDistantPair(vRect &vrect) {
 }
 
 
-void setMBR(Rectangle &rectangle, RectContainer rectContainer){
-
-}
 
 void SplitHeuristic::splitNode(RTree &rtree) {
   vRect &vrect = rtree.node;
@@ -79,18 +76,35 @@ void SplitHeuristic::splitNode(RTree &rtree) {
   int parentFilenameIndex = rtree.parentFilenameIndex;
   int parentRectangleIndex = rtree.parentRectangleIndex;
 
+  splitted.leftParent.address = FilenameGenerator::generateNewIndex();
+  splitted.rightParent.address = FilenameGenerator::generateNewIndex();
+
+
   RTree leftRtree(splitted.left, splitted.leftParent.address, rtree.leaf, rtree.parentFilenameIndex, rtree.parentRectangleIndex);
   RTree rightRtree(splitted.right, splitted.rightParent.address, rtree.leaf, rtree.parentFilenameIndex, rtree.parentRectangleIndex);
+
 
   IOControl::saveRTree(leftRtree, FilenameGenerator::getStringFromIndex(splitted.leftParent.address));
   IOControl::saveRTree(rightRtree, FilenameGenerator::getStringFromIndex(splitted.rightParent.address));
 
-  rtree = IOControl::getRTree(FilenameGenerator::getStringFromIndex(parentFilenameIndex));
 
-  rtree.node[parentRectangleIndex] = splitted.leftParent;
-  rtree.node.push_back(splitted.rightParent);
+  if(parentFilenameIndex != -1){
+    rtree = IOControl::getRTree(FilenameGenerator::getStringFromIndex(parentFilenameIndex));
+    rtree.node[parentRectangleIndex] = splitted.leftParent;
+    rtree.node.push_back(splitted.rightParent);
+    leftRtree.setParentRectangleIndex(parentRectangleIndex);
+    rightRtree.setParentRectangleIndex((int)rtree.node.size() - 1);
+  }
+  else{
+    rtree.node.push_back(splitted.leftParent);
+    rtree.node.push_back(splitted.rightParent);
+    leftRtree.setParentRectangleIndex(0);
+    rightRtree.setParentRectangleIndex(1);
+  }
+
   rtree.leaf = false;
   splitNode(rtree);
+  IOControl::saveRTree(rtree, FilenameGenerator::getStringFromIndex(rtree.getInputFilenameIndex()));
 }
 
 

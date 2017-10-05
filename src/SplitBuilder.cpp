@@ -26,5 +26,13 @@ Rectangle &SplitBuilder::getBackRectangle() {
   return vrect.back();
 }
 
+int SplitBuilder::leftSize() {
+  return (int) result.first.size();
+}
+
+int SplitBuilder::rightSize() {
+  return (int) result.second.size();
+}
+
 
 

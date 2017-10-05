@@ -8,9 +8,9 @@
 
 #include "SplitHeuristic.h"
 
-class LinearSplit : SplitHeuristic {
+class LinearSplit : public SplitHeuristic {
 public:
-    splittedNode split(vRect &vrect) override ;
+  splittedNode split(vRect &vrect) override ;
 };
 
 

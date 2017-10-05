@@ -9,12 +9,9 @@
 #include "Rectangle.h"
 
 class RandomRectangleGenerator {
-private:
-  int currentIndex = 0;
-
 public:
-  void generateDataFile(int n);
-  std::vector<float> generateRandomRect();
+  static void generateDataFile(int n, std::string filename);
+  static std::vector<float> generateRandomRect();
 };
 
 

@@ -6,6 +6,7 @@
 #include "RTreeController.h"
 #include "IOControl.h"
 #include "FilenameGenerator.h"
+#include "SplitHeuristic.h"
 
 
 std::vector<int> RTreeController::search(RTree &rtree, Rectangle &rectangle) {
@@ -36,11 +37,10 @@ void RTreeController::Rsearch(RTree &rtree, Rectangle &rectangle, std::vector<in
   }
 }
 
-template<class Heuristic>
 void RTreeController::insert(Rectangle &rectangle) {
     if (currentNode.leaf){
-      currentNode.node.push_back(rectangle);
-      Heuristic::splitNode(currentNode);
+        currentNode.node.push_back(rectangle);
+        splitHeuristic->splitNode(currentNode);
     } else {
         Rectangle min_rectangle;
         float req_gr = std::numeric_limits<float>::max();
@@ -69,17 +69,19 @@ void RTreeController::insert(Rectangle &rectangle) {
         std::string next_name = FilenameGenerator::getStringFromIndex(min_rectangle.address);
         IOControl::saveRTree(currentNode, FilenameGenerator::getStringFromIndex(currentNode.getInputFilenameIndex()));
         currentNode = IOControl::getRTree(next_name);
-        insert<Heuristic>(rectangle);
+        insert(rectangle);
     }
 }
 
 
-RTreeController::RTreeController(int rootFilenameIndex) : RTreeController(rootFilenameIndex, DEFAULT_MEMORY_SIZE){}
+RTreeController::RTreeController(int rootFilenameIndex, SplitHeuristic *heuristic) : RTreeController(rootFilenameIndex, DEFAULT_MEMORY_SIZE, heuristic){}
 
-RTreeController::RTreeController(int rootFilenameIndex, int memorySize) :
+RTreeController::RTreeController(int rootFilenameIndex, int memorySize, SplitHeuristic *heuristic) :
     rootFilenameIndex(rootFilenameIndex),
     currentNode(IOControl::getRTree(FilenameGenerator::getStringFromIndex(rootFilenameIndex))),
-    memorySize(memorySize) {}
+    memorySize(memorySize),
+    splitHeuristic(heuristic)
+{}
 
 int RTreeController::getRootFilenameIndex() const {
     return rootFilenameIndex;

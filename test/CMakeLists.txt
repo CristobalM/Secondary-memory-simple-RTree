@@ -19,7 +19,7 @@ endif()
 
 
 
-add_executable(tests IOControlTest.cpp ${SOURCE_FILES})
+add_executable(tests IOControlTest.cpp RandomGenerationTest.cpp ${SOURCE_FILES} RandomGenerationTest.cpp)
 
 target_link_libraries(tests RTreeLib gtest gtest_main)
 

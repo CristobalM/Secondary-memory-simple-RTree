@@ -17,8 +17,8 @@ public:
   bool leaf = true;
 
   int inputFilenameIndex;
-  int parentFilenameIndex;
-  int parentRectangleIndex;
+  int parentFilenameIndex = -1;
+  int parentRectangleIndex = -1;
 
   template<class Archive>
   friend void boost::serialization::serialize(Archive &, RTree &, const unsigned int);
@@ -31,6 +31,9 @@ public:
   RTree(vRect &node, int inputFilenameIndex, bool leaf, int parentFilenameIndex, int parentRectangleIndex);
   RTree(int inputFilenameIndex);
   RTree();
+
+  void setParentRectangleIndex(int newIndex);
+  void setParentFilenameIndex(int newIndex);
 
   //void insert(Rectangle &rectangle);
 
@@ -46,9 +49,6 @@ namespace boost{
       ar & rTree.parentFilenameIndex;
       ar & rTree.parentRectangleIndex;
     }
-
-
-
   }
 }
 

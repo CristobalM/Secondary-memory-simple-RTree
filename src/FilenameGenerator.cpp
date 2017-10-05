@@ -5,6 +5,9 @@
 #include <string>
 #include "FilenameGenerator.h"
 
+int FilenameGenerator::index = 0;
+
+
 int FilenameGenerator::generateNewIndex() {
   return index++;
 }

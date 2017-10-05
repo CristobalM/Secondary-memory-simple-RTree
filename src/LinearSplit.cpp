@@ -36,6 +36,18 @@ splittedNode LinearSplit::split(vRect &vrect) {
   SplitBuilder splitBuilder(vrect);
 
   while(vrect.size() > 0){
+    if(splitBuilder.leftSize() + vrect.size() <= DEFAULT_MIN_NODE_SIZE){
+      while(vrect.size() > 0){
+        splitBuilder.putLeft();
+      }
+      break;
+    }
+    else if(splitBuilder.rightSize() + vrect.size() <= DEFAULT_MIN_NODE_SIZE){
+      while(vrect.size() > 0){
+        splitBuilder.putRight();
+      }
+      break;
+    }
     Rectangle selectedRect = splitBuilder.getBackRectangle();
     float toIncreaseArea1 = mbr1.areaIncrease(selectedRect);
     float toIncreaseArea2 = mbr2.areaIncrease(selectedRect);

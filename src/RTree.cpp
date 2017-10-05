@@ -2,13 +2,11 @@
 // Created by Cristobal M on 9/26/17.
 //
 
-#include <limits>
 #include "RTree.h"
-#include "IOControl.h"
-
 
 RTree::RTree(int inputFilenameIndex) {
     this->inputFilenameIndex = inputFilenameIndex;
+    this->parentFilenameIndex = -1;
 }
 
 bool RTree::isLeaf() const {
@@ -17,8 +15,10 @@ bool RTree::isLeaf() const {
 
 RTree::RTree(vRect &node, int inputFilenameIndex, bool leaf, int parentFilenameIndex,
              int parentRectangleIndex) : RTree(inputFilenameIndex) {
+    this->node = node;
     this->leaf = leaf;
     this->parentFilenameIndex = parentFilenameIndex;
+    this->parentRectangleIndex = parentRectangleIndex;
 }
 
 int RTree::getInputFilenameIndex() {
@@ -27,5 +27,13 @@ int RTree::getInputFilenameIndex() {
 
 RTree::RTree() {
 
+}
+
+void RTree::setParentRectangleIndex(int newIndex){
+    parentRectangleIndex = newIndex;
+}
+
+void RTree::setParentFilenameIndex(int newIndex) {
+    parentFilenameIndex = newIndex;
 }
 

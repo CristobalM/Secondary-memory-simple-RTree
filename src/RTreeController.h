@@ -7,19 +7,19 @@
 
 
 #include "RTree.h"
-
+#include "SplitHeuristic.h"
 
 class RTreeController {
-  RTree currentNode;
   int rootFilenameIndex;
   int memorySize;
+  SplitHeuristic *splitHeuristic;
 public:
+  RTree currentNode;
 
 
-  explicit RTreeController(int rootFilenameIndex);
-  RTreeController(int rootFilenameIndex, int memorySize);
+  explicit RTreeController(int rootFilenameIndex, SplitHeuristic *heuristic);
+  RTreeController(int rootFilenameIndex, int memorySize, SplitHeuristic *);
 
-  template<class Heuristic>
   void insert(Rectangle &rectangle);
 
   std::vector<int> search(RTree &rtree, Rectangle &rectangle);

@@ -20,6 +20,9 @@ public:
   std::pair<vRect, vRect> getPair();
 
   Rectangle &getBackRectangle();
+
+  int leftSize();
+  int rightSize();
 };
 
 

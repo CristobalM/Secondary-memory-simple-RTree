@@ -15,16 +15,21 @@ splittedNode GreeneSplit::split(vRect &vrect) {
   else{
     std::sort(vrect.begin(), vrect.end(), [](const Rectangle& lhs, const Rectangle& rhs){ return lhs.x1 < rhs.x1; });
   }
-  vRect vrect2;
+  vRect vrectl;
+  vRect vrectr;
   for (int i = DEFAULT_MEMORY_SIZE; i >= DEFAULT_MEMORY_SIZE/2; i--){
-    vrect2.push_back(std::move(vrect[i]));
+    vrectl.push_back(std::move(vrect[i]));
+    vrect.pop_back();
+  }
+  for (int i = DEFAULT_MEMORY_SIZE/2 - 1; i>= 0; i--){
+    vrectr.push_back(std::move(vrect[i]));
     vrect.pop_back();
   }
   splittedNode sn;
-  sn.left = vrect;
-  sn.right = vrect2;
-  sn.leftParent = MBR(vrect);
-  sn.rightParent = MBR(vrect2);
+  sn.left = vrectl;
+  sn.right = vrectr;
+  sn.leftParent = MBR(vrectl);
+  sn.rightParent = MBR(vrectr);
   return sn;
 }
 
