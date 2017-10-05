@@ -17,7 +17,7 @@ public:
   SplitBuilder(vRect &vrect);
   void putLeft();
   void putRight();
-  std::pair<vRect&, vRect&> getPair();
+  std::pair<vRect, vRect> getPair();
 
   Rectangle &getBackRectangle();
 };

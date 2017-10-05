@@ -18,7 +18,7 @@ void SplitBuilder::putRight() {
   vrect.pop_back();
 }
 
-std::pair<vRect &, vRect &> SplitBuilder::getPair() {
+std::pair<vRect, vRect> SplitBuilder::getPair() {
   return result;
 }
 

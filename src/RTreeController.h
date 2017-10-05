@@ -11,20 +11,22 @@
 
 class RTreeController {
   RTree currentNode;
-  std::string rootFilename;
-
+  int rootFilenameIndex;
   int memorySize;
-
 public:
 
-  RTreeController(std::string rootFilename);
-  RTreeController(std::string rootFilename, int memorySize);
+
+  explicit RTreeController(int rootFilenameIndex);
+  RTreeController(int rootFilenameIndex, int memorySize);
 
   template<class Heuristic>
   void insert(Rectangle &rectangle);
 
   std::vector<int> search(RTree &rtree, Rectangle &rectangle);
   void Rsearch(RTree &rtree, Rectangle &rectangle, std::vector<int> &found);
+
+  int getRootFilenameIndex() const;
+
 
 };
 

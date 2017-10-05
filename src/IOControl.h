@@ -19,7 +19,10 @@ public:
     static void saveRTree(RTree vrect, std::string fname);
     static RTree getRTree(std::string fname);
 
-    static void deleteFilename(std::string fname);
+    template <class Heuristic>
+    static int processInput(std::string fname);
+
+    //static void deleteFilename(std::string fname);
 
 };
 

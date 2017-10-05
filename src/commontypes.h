@@ -13,5 +13,4 @@ const int DEFAULT_MIN_NODE_SIZE = DEFAULT_MEMORY_SIZE*4/10;
 typedef std::vector<Rectangle> vRect;
 
 
-
 #endif //LOGARITMOS_TAREA1_COMMONTYPES_H
