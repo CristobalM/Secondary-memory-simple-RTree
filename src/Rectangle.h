@@ -15,7 +15,7 @@ public:
   Rectangle();
   Rectangle(float x1, float x2, float y1, float y2, int address, bool isLeaf);
 
-  Rectangle deriveParent(std::string childaddr);
+  Rectangle deriveParent(int childaddr);
 
   static float getArea(Rectangle &rectangle);
 

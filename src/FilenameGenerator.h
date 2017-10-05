@@ -11,7 +11,7 @@ class FilenameGenerator {
 private:
   static int index;
 public:
-  static std::string generateNewFilename();
+  static int generateNewIndex();
   static std::string getStringFromIndex(int index);
 
 };

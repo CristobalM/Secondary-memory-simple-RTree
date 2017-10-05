@@ -27,9 +27,9 @@ RectContainer findMBR(Rectangle &rect1, Rectangle &rect2){
 
 RectContainer findMBR(vRect &vrect){
   float minX1, minY1;
-  minX1 = minY1 = std::numeric_limits::infinity();
+  minX1 = minY1 = std::numeric_limits<float>::infinity();
   float maxX2, maxY2;
-  maxX2 = maxY2 = -std::numeric_limits::infinity();
+  maxX2 = maxY2 = -std::numeric_limits<float>::infinity();
   for (auto &rect : vrect){
     if (rect.x1 < minX1){
       minX1 = rect.x1;
@@ -67,7 +67,7 @@ bool Rectangle::intersect(Rectangle &otherRect) {
              (otherRect.y1 > this->y2));
 }
 
-Rectangle Rectangle::deriveParent(std::string childaddr) {
+Rectangle Rectangle::deriveParent(int childaddr) {
   return Rectangle(x1, x2, y1, y2, childaddr, false);
 }
 

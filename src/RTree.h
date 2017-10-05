@@ -30,6 +30,7 @@ public:
 
   RTree(vRect &node, int inputFilenameIndex, bool leaf, int parentFilenameIndex, int parentRectangleIndex);
   RTree(int inputFilenameIndex);
+  RTree();
 
   //void insert(Rectangle &rectangle);
 

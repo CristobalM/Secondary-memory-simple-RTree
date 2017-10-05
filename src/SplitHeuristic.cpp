@@ -13,9 +13,9 @@
 
 std::pair<int, int> SplitHeuristic::mostDistantPair(vRect &vrect) {
   float minX, minY, minX1, minY1;
-  minX = minY = minX1 = minY1 = std::numeric_limits::infinity();
+  minX = minY = minX1 = minY1 = std::numeric_limits<float>::infinity();
   float maxX, maxY, maxX2, maxY2;
-  maxX = maxY = maxX2 = maxY2 = -std::numeric_limits::infinity();
+  maxX = maxY = maxX2 = maxY2 = -std::numeric_limits<float>::infinity();
   int rightmostx1, leftmostx2, uppermosty1, lowermosty2;
   rightmostx1 = leftmostx2 = uppermosty1 = lowermosty2 = -1;
   for(int i = 0; i < vrect.size(); i++){

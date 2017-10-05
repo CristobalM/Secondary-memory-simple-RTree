@@ -43,8 +43,8 @@ void RTreeController::insert(Rectangle &rectangle) {
       Heuristic::splitNode(currentNode);
     } else {
         Rectangle min_rectangle;
-        float req_gr = std::numeric_limits::max();
-        float area = std::numeric_limits::max();
+        float req_gr = std::numeric_limits<float>::max();
+        float area = std::numeric_limits<float>::max();
         for (auto &node_rect : currentNode.node) {
             float new_req_gr = node_rect.areaIncrease(rectangle);
             float new_area = Rectangle::getArea(node_rect);
@@ -69,7 +69,7 @@ void RTreeController::insert(Rectangle &rectangle) {
         std::string next_name = FilenameGenerator::getStringFromIndex(min_rectangle.address);
         IOControl::saveRTree(currentNode, FilenameGenerator::getStringFromIndex(currentNode.getInputFilenameIndex()));
         currentNode = IOControl::getRTree(next_name);
-        insert(rectangle);
+        insert<Heuristic>(rectangle);
     }
 }
 

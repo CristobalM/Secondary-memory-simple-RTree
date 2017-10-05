@@ -5,8 +5,8 @@
 #include <string>
 #include "FilenameGenerator.h"
 
-std::string FilenameGenerator::generateNewFilename() {
-  return "rtree" + std::to_string(index++) + ".txt";
+int FilenameGenerator::generateNewIndex() {
+  return index++;
 }
 
 std::string FilenameGenerator::getStringFromIndex(int index) {
