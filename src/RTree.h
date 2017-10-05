@@ -25,7 +25,7 @@ public:
 
   bool isLeaf() const;
 
-  int &getInputFilenameIndex() const;
+  int getInputFilenameIndex();
 
 
   RTree(vRect &node, int inputFilenameIndex, bool leaf, int parentFilenameIndex, int parentRectangleIndex);

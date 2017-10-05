@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <limits>
 #include "GreeneSplit.h"
 
 splittedNode GreeneSplit::split(vRect &vrect) {

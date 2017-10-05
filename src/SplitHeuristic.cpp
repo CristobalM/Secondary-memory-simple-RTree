@@ -9,6 +9,7 @@
 #include "commontypes.h"
 #include "SplitHeuristic.h"
 #include "IOControl.h"
+#include "FilenameGenerator.h"
 
 std::pair<int, int> SplitHeuristic::mostDistantPair(vRect &vrect) {
   float minX, minY, minX1, minY1;
@@ -75,16 +76,16 @@ void SplitHeuristic::splitNode(RTree &rtree) {
   }
   splittedNode splitted = split(vrect);
 
-  std::string parentFilename = rtree.parentFilenameIndex;
+  int parentFilenameIndex = rtree.parentFilenameIndex;
   int parentRectangleIndex = rtree.parentRectangleIndex;
 
   RTree leftRtree(splitted.left, splitted.leftParent.address, rtree.leaf, rtree.parentFilenameIndex, rtree.parentRectangleIndex);
   RTree rightRtree(splitted.right, splitted.rightParent.address, rtree.leaf, rtree.parentFilenameIndex, rtree.parentRectangleIndex);
 
-  IOControl::saveRTree(leftRtree, splitted.leftParent.address);
-  IOControl::saveRTree(rightRtree, splitted.rightParent.address);
+  IOControl::saveRTree(leftRtree, FilenameGenerator::getStringFromIndex(splitted.leftParent.address));
+  IOControl::saveRTree(rightRtree, FilenameGenerator::getStringFromIndex(splitted.rightParent.address));
 
-  rtree = IOControl::getRTree(parentFilename);
+  rtree = IOControl::getRTree(FilenameGenerator::getStringFromIndex(parentFilenameIndex));
 
   rtree.node[parentRectangleIndex] = splitted.leftParent;
   rtree.node.push_back(splitted.rightParent);
