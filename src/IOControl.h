@@ -14,13 +14,15 @@ class IOControl {
 private:
     IOControl() = default;
 public:
-    static void saveVRect(vRect vrect, std::string fname);
-    static vRect getVRect(std::string fname);
-    static void saveRTree(RTree vrect, std::string fname);
-    static RTree getRTree(std::string fname);
 
-    static void deleteFilename(std::string fname);
 
+  static RTree getRTree(std::string fname);
+
+  static vRect getVRect(std::string fname);
+
+  static void saveVRect(vRect vrect, std::string fname);
+
+  static void saveRTree(RTree rtree, std::string fname);
 };
 
 

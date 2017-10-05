@@ -13,10 +13,8 @@ float getRandomFloat(int lower, int upper){
   return lower + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(upper-lower)));
 }
 
-int* RandomRectangleGenerator::generateRandomRect() {
-  int coords[4];
-  std::uniform_int_distribution<float> coordinatesDistribution(0,500000);
-  std::uniform_int_distribution<float> heightWidthDistribution(1,100);
+std::vector<float> RandomRectangleGenerator::generateRandomRect() {
+  std::vector<float> coords;
   float x1 = getRandomFloat(0,500000);
   float y1 = getRandomFloat(0,500000);
   float height = getRandomFloat(1,100);
@@ -32,7 +30,7 @@ void RandomRectangleGenerator::generateDataFile(int n) {
   std::ofstream pFile;
   pFile.open("testt1.txt");
   for (int i=0; i<n; i++){
-    int* coords = generateRandomRect();
+    std::vector<float> coords = generateRandomRect();
     pFile << std::to_string(coords[0]) + "," + std::to_string(coords[1]) + "," + std::to_string(coords[2]) + "," + std::to_string(coords[3]) + "\n";
   }
   pFile.close();

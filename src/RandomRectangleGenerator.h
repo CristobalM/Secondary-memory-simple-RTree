@@ -14,7 +14,7 @@ private:
 
 public:
   void generateDataFile(int n);
-  int* generateRandomRect();
+  std::vector<float> generateRandomRect();
 };
 
 

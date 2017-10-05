@@ -5,7 +5,7 @@
 #include <string>
 #include "FilenameGenerator.h"
 
-int FilenameGenerator::generateNewFilename() {
+int FilenameGenerator::generateNewIndex() {
   return index++;
 }
 
