@@ -9,23 +9,7 @@
 #include "RTree.h"
 #include "RTreeController.h"
 #include "FilenameGenerator.h"
-
-void IOControl::saveVRect(vRect vrect, std::string fname) {
-    std::ofstream ofs(fname);
-
-    boost::archive::text_oarchive oa(ofs);
-    oa << vrect;
-}
-
-vRect IOControl::getVRect(std::string fname) {
-    vRect out;
-    std::ifstream ifs(fname);
-
-    boost::archive::text_iarchive ia(ifs);
-    ia >> out;
-
-    return out;
-}
+#include <iostream>
 
 void IOControl::saveRTree(RTree rtree, std::string fname) {
     std::ofstream ofs(fname);
@@ -38,8 +22,7 @@ RTree IOControl::getRTree(std::string fname) {
     RTree out = RTree();
     std::ifstream ifs(fname);
     if(!ifs) {
-        saveRTree(out, fname);
-        ifs = std::ifstream(fname);
+        return out;
     }
 
     boost::archive::text_iarchive ia(ifs);
@@ -61,8 +44,8 @@ int IOControl::processInput(std::string fname) {
         std::vector <std::string> record;
         int count = 0;
         float minX, maxX, minY, maxY;
-        minX, minY = std::numeric_limits<float>::infinity();
-        maxX, maxY = -std::numeric_limits<float>::infinity();
+        minX = minY = std::numeric_limits<float>::infinity();
+        maxX = maxY = -std::numeric_limits<float>::infinity();
         while (ss){
             std::string s2;
             if (!getline( ss, s2, ',')){
