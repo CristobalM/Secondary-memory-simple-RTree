@@ -6,7 +6,7 @@
 #include "commontypes.h"
 #include "FilenameGenerator.h"
 
-Rectangle::Rectangle(float x1, float x2, float y1, float y2, std::string address, bool isLeaf) :
+Rectangle::Rectangle(float x1, float x2, float y1, float y2, int address, bool isLeaf) :
   x1(x1), x2(x2), y1(y1), y2(y2), address(address) {}
 
 float Rectangle::getArea(Rectangle &rectangle) {
