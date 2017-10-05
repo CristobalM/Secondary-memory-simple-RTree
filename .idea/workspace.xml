@@ -15,23 +15,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59215a4b-b69b-45f6-a444-def61d73fa9e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+    <list default="true" id="59215a4b-b69b-45f6-a444-def61d73fa9e" name="Default" comment="added input reader">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/IOControl.cpp" afterPath="$PROJECT_DIR$/src/IOControl.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/IOControl.h" afterPath="$PROJECT_DIR$/src/IOControl.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RTreeController.cpp" afterPath="$PROJECT_DIR$/src/RTreeController.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RTreeController.h" afterPath="$PROJECT_DIR$/src/RTreeController.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RandomRectangleGenerator.cpp" afterPath="$PROJECT_DIR$/src/RandomRectangleGenerator.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Rectangle.cpp" afterPath="$PROJECT_DIR$/src/Rectangle.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SplitBuilder.cpp" afterPath="$PROJECT_DIR$/src/SplitBuilder.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SplitBuilder.h" afterPath="$PROJECT_DIR$/src/SplitBuilder.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SplitHeuristic.h" afterPath="$PROJECT_DIR$/src/SplitHeuristic.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/commontypes.h" afterPath="$PROJECT_DIR$/src/commontypes.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.cpp" afterPath="$PROJECT_DIR$/src/main.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,18 +36,6 @@
               <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding>
                 <element signature="e#115#132#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LinearSplit.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/LinearSplit.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding>
-                <element signature="e#46#70#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -109,15 +83,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IOControl.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IOControl.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/IOControl.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-170">
-              <caret line="52" column="48" lean-forward="true" selection-start-line="52" selection-start-column="48" selection-end-line="52" selection-end-column="48" />
+            <state relative-caret-position="352">
+              <caret line="69" column="13" lean-forward="true" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
               <folding>
                 <element signature="e#44#62#0" expanded="true" />
                 <element signature="e#975#992#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="5" column="6" lean-forward="true" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -231,6 +215,7 @@
         <option value="$PROJECT_DIR$/src/Rectangle.cpp" />
         <option value="$PROJECT_DIR$/src/IOControl.cpp" />
         <option value="$PROJECT_DIR$/src/IOControl.h" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -268,11 +253,6 @@
             <path>
               <item name="logaritmos_tarea1" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
               <item name="logaritmos_tarea1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="logaritmos_tarea1" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
-              <item name="logaritmos_tarea1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="logaritmos_tarea1" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
@@ -528,7 +508,7 @@
       <workItem from="1507066409826" duration="6631000" />
       <workItem from="1507077111961" duration="558000" />
       <workItem from="1507148304370" duration="12008000" />
-      <workItem from="1507214484806" duration="4273000" />
+      <workItem from="1507214484806" duration="4399000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'insert' of https://github.com/CristobalM/logaritmos_tarea1 into insert&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/RTree.cpp&#10;#&#9;src/RTree.h&#10;#&#9;src/Rectangle.cpp&#10;#&#9;src/Rectangle.h&#10;#&#9;src/SplitHeuristic.h">
       <created>1507077159219</created>
@@ -565,7 +545,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507158807843</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added input reader">
+      <created>1507218766756</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1507218766756</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -574,7 +561,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42231000" />
+    <option name="totallyTimeSpent" value="42357000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1364" height="836" extended-state="0" />
@@ -585,8 +572,8 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45068493" sideWeight="0.4882698" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29536423" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -615,7 +602,8 @@
     <MESSAGE value="Merge branch 'insert' of https://github.com/CristobalM/logaritmos_tarea1 into insert&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/RTree.cpp&#10;#&#9;src/RTree.h&#10;#&#9;src/Rectangle.cpp&#10;#&#9;src/Rectangle.h&#10;#&#9;src/SplitHeuristic.h" />
     <MESSAGE value="changed split signature" />
     <MESSAGE value="supposedly everything works again" />
-    <option name="LAST_COMMIT_MESSAGE" value="supposedly everything works again" />
+    <MESSAGE value="added input reader" />
+    <option name="LAST_COMMIT_MESSAGE" value="added input reader" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -802,13 +790,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SimpleRectangle.cpp" />
     <entry file="file://$PROJECT_DIR$/src/SimpleRectangle.h" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -910,9 +891,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="35" />
-          <folding>
-            <element signature="e#41#58#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1027,12 +1006,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/IOControl.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170">
-          <caret line="52" column="48" lean-forward="true" selection-start-line="52" selection-start-column="48" selection-end-line="52" selection-end-column="48" />
+        <state relative-caret-position="352">
+          <caret line="69" column="13" lean-forward="true" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
           <folding>
             <element signature="e#44#62#0" expanded="true" />
             <element signature="e#975#992#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="6" lean-forward="true" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
