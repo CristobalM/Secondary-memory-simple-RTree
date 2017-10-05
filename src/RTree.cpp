@@ -11,15 +11,21 @@ RTree::RTree(int inputFilenameIndex) {
     this->inputFilenameIndex = inputFilenameIndex;
 }
 
-
-const int RTree::getInputFilenameIndex() const {
-    return inputFilenameIndex;
-}
-
 bool RTree::isLeaf() const {
     return leaf;
 }
 
 RTree::RTree(vRect &node, int inputFilenameIndex, bool leaf, int parentFilenameIndex,
-             int parentRectangleIndex) : RTree(inputFilenameIndex), leaf(leaf), parentFilenameIndex(parentFilenameIndex) {
+             int parentRectangleIndex) : RTree(inputFilenameIndex) {
+    this->leaf = leaf;
+    this->parentFilenameIndex = parentFilenameIndex;
 }
+
+int RTree::getInputFilenameIndex() {
+    return inputFilenameIndex;
+}
+
+RTree::RTree() {
+
+}
+

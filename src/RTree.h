@@ -25,11 +25,12 @@ public:
 
   bool isLeaf() const;
 
-  int &getInputFilenameIndex() const;
+  int getInputFilenameIndex();
 
 
   RTree(vRect &node, int inputFilenameIndex, bool leaf, int parentFilenameIndex, int parentRectangleIndex);
   RTree(int inputFilenameIndex);
+  RTree();
 
   //void insert(Rectangle &rectangle);
 

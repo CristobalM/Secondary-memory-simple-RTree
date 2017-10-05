@@ -9,11 +9,13 @@
 
 class FilenameGenerator {
 private:
-  static int index = 0;
+  static int index;
 public:
-  static int generateNewFilename();
+  static int generateNewIndex();
   static std::string getStringFromIndex(int index);
 
 };
+
+int FilenameGenerator::index = 0;
 
 #endif //LOGARITMOS_TAREA1_FILENAMEGENERATOR_H

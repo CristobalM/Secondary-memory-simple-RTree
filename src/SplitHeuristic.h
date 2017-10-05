@@ -24,6 +24,4 @@ protected:
   void splitNode(RTree &rtree);
 };
 
-
-
 #endif //LOGARITMOS_TAREA1_SPLITHEURISTIC_H
