@@ -12,6 +12,8 @@ class GreeneSplit : SplitHeuristic {
 public:
   splittedNode split(vRect &vrect) override ;
   bool horMostDistantDimension(vRect &vRect);
+
+  Rectangle MBR(vRect &vector);
 };
 
 

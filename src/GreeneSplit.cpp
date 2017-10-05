@@ -6,6 +6,7 @@
 #include <cmath>
 #include <limits>
 #include "GreeneSplit.h"
+#include "FilenameGenerator.h"
 
 splittedNode GreeneSplit::split(vRect &vrect) {
   if (horMostDistantDimension(vrect)){
@@ -19,7 +20,12 @@ splittedNode GreeneSplit::split(vRect &vrect) {
     vrect2.push_back(std::move(vrect[i]));
     vrect.pop_back();
   }
-  return std::pair(vrect, vrect2);
+  splittedNode sn;
+  sn.left = vrect;
+  sn.right = vrect2;
+  sn.leftParent = MBR(vrect);
+  sn.rightParent = MBR(vrect2);
+  return sn;
 }
 
 
@@ -60,4 +66,26 @@ bool GreeneSplit::horMostDistantDimension(vRect &vrect) {
 
   return xDimSeparationNorm >= yDimSeparationNorm;
 
+}
+
+Rectangle GreeneSplit::MBR(vRect &vect) {
+  float minX1, minY1;
+  minX1 = minY1 = std::numeric_limits::infinity();
+  float maxX2, maxY2;
+  maxX2 = maxY2 = -std::numeric_limits::infinity();
+  for (auto &rect : vect){
+    if (rect.x1 < minX1){
+      minX1 = rect.x1;
+    }
+    if (rect.x2 > maxX2){
+      maxX2 = rect.x2;
+    }
+    if (rect.y1 < minY1){
+      minY1 = rect.y1;
+    }
+    if (rect.y2 > maxY2){
+      maxY2 = rect.y2;
+    }
+  }
+  return Rectangle(minX1, maxX2, minY1, maxY2, FilenameGenerator::generateNewFilename(), false);
 }
