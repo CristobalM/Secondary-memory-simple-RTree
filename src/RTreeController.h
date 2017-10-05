@@ -7,15 +7,11 @@
 
 
 #include "RTree.h"
-#include "SplitHeuristic.h"
 
-const int DEFAULT_MEMORY_SIZE = 1000000;
 
-template <class Heuristic>
 class RTreeController {
   RTree currentNode;
   std::string rootFilename;
-  //SplitHeuristic *splitHeuristic;
 
   int memorySize;
 
@@ -24,6 +20,7 @@ public:
   RTreeController(std::string rootFilename);
   RTreeController(std::string rootFilename, int memorySize);
 
+  template<class Heuristic>
   void insert(Rectangle &rectangle);
 
   std::vector<int> search(RTree &rtree, Rectangle &rectangle);

@@ -3,10 +3,11 @@
 //
 
 #include <algorithm>
+#include <cmath>
 #include "GreeneSplit.h"
 #include "FilenameGenerator.h"
 
-splittedNode GreeneSplit::split(vRect &vrect, std::string parentFilename, int parentRectangleIndex) {
+splittedNode GreeneSplit::split(vRect &vrect) {
   if (horMostDistantDimension(vrect)){
     std::sort(vrect.begin(), vrect.end(), [](const Rectangle& lhs, const Rectangle& rhs){ return lhs.y1 < rhs.y1; });
   }

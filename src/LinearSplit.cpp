@@ -16,7 +16,9 @@ void permutateVRect(vRect &which, std::vector<long> &permutation){
   }
 }
 
-splittedNode LinearSplit::split(vRect &vrect, std::string parentFilename, int parentRectangleIndex) {
+
+
+splittedNode LinearSplit::split(vRect &vrect) {
   vRect node1;
   vRect node2;
   std::pair<int,int> distantRects = mostDistantPair(vrect);
@@ -47,5 +49,12 @@ splittedNode LinearSplit::split(vRect &vrect, std::string parentFilename, int pa
     }
   }
   splittedNode out;
+  out.leftParent = mbr1;
+  out.rightParent = mbr2;
+  std::pair<vRect, vRect> resultPair = splitBuilder.getPair();
+  out.left = resultPair.first;
+  out.right = resultPair.second;
 
+  return out;
 }
+

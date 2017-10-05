@@ -7,15 +7,19 @@
 #include "IOControl.h"
 
 
-RTree::RTree(std::string inputFilename) {
-    this->inputFilename = inputFilename;
+RTree::RTree(int inputFilenameIndex) {
+    this->inputFilenameIndex = inputFilenameIndex;
 }
 
 
-const std::string &RTree::getInputFilename() const {
-    return inputFilename;
+const int RTree::getInputFilenameIndex() const {
+    return inputFilenameIndex;
 }
 
 bool RTree::isLeaf() const {
     return leaf;
+}
+
+RTree::RTree(vRect &node, int inputFilenameIndex, bool leaf, int parentFilenameIndex,
+             int parentRectangleIndex) : RTree(inputFilenameIndex), leaf(leaf), parentFilenameIndex(parentFilenameIndex) {
 }

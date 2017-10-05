@@ -10,7 +10,7 @@
 
 class GreeneSplit : SplitHeuristic {
 public:
-  splittedNode split(vRect &vrect, std::string parentFilename, int parentRectangleIndex) override ;
+  splittedNode split(vRect &vrect) override ;
   bool horMostDistantDimension(vRect &vRect);
 
   Rectangle MBR(vRect &vector);
