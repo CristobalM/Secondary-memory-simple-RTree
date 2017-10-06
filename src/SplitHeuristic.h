@@ -18,6 +18,7 @@ struct splittedNode{
 class SplitHeuristic {
 public:
   virtual splittedNode split(vRect &vrect) = 0;
+  virtual std::string heuristicName() = 0;
   std::pair<int, int> mostDistantPair(vRect &);
   std::vector<long> fisherYatesVariation(long result_size, long choice_set_size);
 

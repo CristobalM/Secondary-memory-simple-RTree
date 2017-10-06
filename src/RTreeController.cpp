@@ -74,7 +74,7 @@ void RTreeController::insert(Rectangle &rectangle) {
 }
 
 
-RTreeController::RTreeController(int rootFilenameIndex, SplitHeuristic *heuristic) : RTreeController(rootFilenameIndex, DEFAULT_MEMORY_SIZE, heuristic){}
+RTreeController::RTreeController(int rootFilenameIndex, SplitHeuristic *heuristic) : RTreeController(rootFilenameIndex, DEFAULT_MAX_NODE_SIZE, heuristic){}
 
 RTreeController::RTreeController(int rootFilenameIndex, int memorySize, SplitHeuristic *heuristic) :
     rootFilenameIndex(rootFilenameIndex),

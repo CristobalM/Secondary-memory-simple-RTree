@@ -17,11 +17,11 @@ splittedNode GreeneSplit::split(vRect &vrect) {
   }
   vRect vrectl;
   vRect vrectr;
-  for (int i = DEFAULT_MEMORY_SIZE; i >= DEFAULT_MEMORY_SIZE/2; i--){
+  for (int i = DEFAULT_MAX_NODE_SIZE; i >= DEFAULT_MAX_NODE_SIZE/2; i--){
     vrectl.push_back(std::move(vrect[i]));
     vrect.pop_back();
   }
-  for (int i = DEFAULT_MEMORY_SIZE/2 - 1; i>= 0; i--){
+  for (int i = DEFAULT_MAX_NODE_SIZE/2 - 1; i>= 0; i--){
     vrectr.push_back(std::move(vrect[i]));
     vrect.pop_back();
   }
@@ -93,4 +93,8 @@ Rectangle GreeneSplit::MBR(vRect &vect) {
     }
   }
   return Rectangle(minX1, maxX2, minY1, maxY2, FilenameGenerator::generateNewIndex(), false);
+}
+
+std::string GreeneSplit::heuristicName() {
+  return "GreeneSplit";
 }

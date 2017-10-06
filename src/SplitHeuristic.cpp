@@ -68,7 +68,7 @@ std::pair<int, int> SplitHeuristic::mostDistantPair(vRect &vrect) {
 
 void SplitHeuristic::splitNode(RTree &rtree) {
   vRect &vrect = rtree.node;
-  if(vrect.size() < DEFAULT_MEMORY_SIZE + 1){
+  if(vrect.size() < DEFAULT_MAX_NODE_SIZE + 1){
     return;
   }
   splittedNode splitted = split(vrect);

@@ -11,6 +11,7 @@
 class GreeneSplit : public SplitHeuristic {
 public:
   splittedNode split(vRect &vrect) override ;
+  std::string heuristicName() override;
   bool horMostDistantDimension(vRect &vRect);
 
   Rectangle MBR(vRect &vector);

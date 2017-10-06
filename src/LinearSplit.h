@@ -11,6 +11,7 @@
 class LinearSplit : public SplitHeuristic {
 public:
   splittedNode split(vRect &vrect) override ;
+  std::string heuristicName() override ;
 };
 
 

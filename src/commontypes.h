@@ -7,8 +7,10 @@
 
 #include <vector>
 #include "Rectangle.h"
-const int DEFAULT_MEMORY_SIZE = 55000000;
-const int DEFAULT_MIN_NODE_SIZE = DEFAULT_MEMORY_SIZE*4/10;
+
+const int DEFAULT_MAX_MEM_SIZE = 55000000;
+const int DEFAULT_MAX_NODE_SIZE = 113;
+const int DEFAULT_MIN_NODE_SIZE = DEFAULT_MAX_NODE_SIZE*4/10;
 
 typedef std::vector<Rectangle> vRect;
 

@@ -4,6 +4,8 @@
 
 #include <fstream>
 #include <boost/serialization/vector.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 #include <sstream>
 #include "IOControl.h"
 #include "RTree.h"
@@ -11,28 +13,53 @@
 #include "FilenameGenerator.h"
 #include <iostream>
 
+int IOControl::estimatedCachedSize = 0;
+
+std::streampos fileSize( const char* filePath ){
+
+    std::streampos fsize = 0;
+    std::ifstream file( filePath, std::ios::binary );
+
+    fsize = file.tellg();
+    file.seekg( 0, std::ios::end );
+    fsize = file.tellg() - fsize;
+    file.close();
+
+    return fsize;
+}
+
 void IOControl::saveRTree(RTree rtree, std::string fname) {
     std::ofstream ofs(fname);
 
-    boost::archive::text_oarchive oa(ofs);
+
+
+    boost::archive::binary_oarchive oa(ofs);
     oa << rtree;
+    Cached[fname] = rtree;
+    estimatedCachedSize += rtree.node.size();
+    checkCache();
 }
 
 RTree IOControl::getRTree(std::string fname) {
+    if(Cached.find(fname) != Cached.end()){
+        return Cached[fname];
+    }
     RTree out = RTree();
     std::ifstream ifs(fname);
     if(!ifs) {
         return out;
     }
 
-    boost::archive::text_iarchive ia(ifs);
+    boost::archive::binary_iarchive ia(ifs);
     ia >> out;
 
+    Cached[fname] = out;
+    checkCache();
     return out;
 }
 
 
-int IOControl::processInput(std::string fname, SplitHeuristic *heuristic) {
+RTreeController IOControl::processInput(std::string fname, SplitHeuristic *heuristic) {
     std::ifstream infile(fname);
     RTreeController controller(FilenameGenerator::generateNewIndex(), heuristic);
     int index = 0;
@@ -76,7 +103,14 @@ int IOControl::processInput(std::string fname, SplitHeuristic *heuristic) {
     if (!infile.eof()) {
         std::cerr << "Error during input file processing\n";
     }
-    return controller.getRootFilenameIndex();
+    return controller;
+}
+
+void IOControl::checkCache() {
+    if(estimatedCachedSize > DEFAULT_MAX_MEM_SIZE){
+        Cached.clear();
+        estimatedCachedSize = 0;
+    }
 }
 
 

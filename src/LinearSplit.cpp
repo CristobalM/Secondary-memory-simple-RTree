@@ -70,3 +70,7 @@ splittedNode LinearSplit::split(vRect &vrect) {
   return out;
 }
 
+std::string LinearSplit::heuristicName() {
+  return "LinearSplit";
+}
+
