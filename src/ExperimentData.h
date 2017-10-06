@@ -9,15 +9,19 @@
 #include <chrono>
 #include <iostream>
 
+typedef std::chrono::high_resolution_clock hires;
+
 struct ExperimentData{
   std::string experimentName;
-  std::chrono::time_point startTime, endTime;
-  std::chrono::duration timeElapsed;
+  std::chrono::time_point<hires> startTime, endTime;
 
-  void printExperiment(){
-      std::cout << "Experiment " << experimentName << "." << std::endl
-                << "\tTime elapsed (nanoseconds): " << std::chrono::duration_cast<std::chrono::nanoseconds>(timeElapsed).count() << "." << std::endl;
+  static long castNanoSeconds( std::chrono::duration<long> &which){
+      return std::chrono::duration_cast<std::chrono::nanoseconds>(which).count();
+  }
+  long retrieveTimeElapsedNanoSeconds(){
+      return std::chrono::duration_cast<std::chrono::nanoseconds>(endTime -startTime).count();
   }
 };
+
 
 #endif //LOGARITMOS_TAREA1_EXPERIMENTDATA_H

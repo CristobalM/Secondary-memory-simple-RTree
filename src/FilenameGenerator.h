@@ -6,14 +6,19 @@
 #define LOGARITMOS_TAREA1_FILENAMEGENERATOR_H
 
 #include <string>
+#include <boost/uuid/random_generator.hpp>
 
 class FilenameGenerator {
 private:
   static int index;
+  static boost::uuids::random_generator uuidgenerator;
+
 public:
   static int generateNewIndex();
-  static std::string getStringFromIndex(int index);
+  //static std::string getStringFromIndex(int index);
+  static std::string makeUuid();
 
+  static std::string getStringFromIndex(int index, std::string prefix);
 };
 
 

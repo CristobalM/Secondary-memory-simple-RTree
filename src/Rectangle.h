@@ -13,7 +13,10 @@ public:
   float x1, x2, y1, y2;
   int address;
   Rectangle();
-  Rectangle(float x1, float x2, float y1, float y2, int address, bool isLeaf);
+  Rectangle(float x1, float x2, float y1, float y2, int address);
+
+  Rectangle(float x1, float x2, float y1, float y2);
+
 
   Rectangle deriveParent(int childaddr);
 
@@ -37,7 +40,7 @@ namespace boost{
       ar & rectangle.x1;
       ar & rectangle.x2;
       ar & rectangle.y1;
-      ar & rectangle.y1;
+      ar & rectangle.y2;
       ar & rectangle.address;
     }
   }

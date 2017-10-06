@@ -9,6 +9,7 @@
 #include <vector>
 #include <chrono>
 #include "ExperimentData.h"
+#include "RTreeController.h"
 
 
 class Experiments {
@@ -16,6 +17,12 @@ class Experiments {
 public:
   static void startExperiment(std::string name);
   static ExperimentData& stopExperiment();
+  static long averageRectanglesPerNode(RTreeController &controller);
+  static long averageRectanglesPerNodeRec(RTreeController &controller, int* nptr);
+
+
+
+
 };
 
 

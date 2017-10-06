@@ -22,7 +22,7 @@ public:
   std::pair<int, int> mostDistantPair(vRect &);
   std::vector<long> fisherYatesVariation(long result_size, long choice_set_size);
 
-  void splitNode(RTree &rtree);
+  void splitNode(RTree &rtree, std::string controllerPrefix);
 };
 
 #endif //LOGARITMOS_TAREA1_SPLITHEURISTIC_H

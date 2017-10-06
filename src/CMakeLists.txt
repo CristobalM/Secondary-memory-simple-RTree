@@ -19,7 +19,7 @@ target_link_libraries(${TARGET_NAME} RTreeLib)
 
 
 if(NOT MSVC)
-    find_package(Boost REQUIRED COMPONENTS serialization)
+    find_package(Boost REQUIRED COMPONENTS serialization filesystem)
 
     if (Boost_FOUND)
         include_directories(${Boost_INCLUDE_DIRS})

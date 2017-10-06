@@ -19,14 +19,14 @@ endif()
 
 
 
-add_executable(tests IOControlTest.cpp RandomGenerationTest.cpp ${SOURCE_FILES} RandomGenerationTest.cpp)
+add_executable(tests IOControlTest.cpp RandomGenerationTest.cpp SearchTest.cpp ${SOURCE_FILES} RandomGenerationTest.cpp SearchTest.cpp)
 
 target_link_libraries(tests RTreeLib gtest gtest_main)
 
 
 
 if(NOT MSVC)
-    find_package(Boost REQUIRED COMPONENTS serialization)
+    find_package(Boost REQUIRED COMPONENTS serialization filesystem)
     if (Boost_FOUND)
         include_directories(${Boost_INCLUDE_DIRS})
         target_link_libraries(tests ${Boost_LIBRARIES})

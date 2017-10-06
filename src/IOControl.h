@@ -22,14 +22,20 @@ public:
 
   static std::unordered_map<std::string, RTree> Cached;
 
-  static RTree getRTree(std::string fname);
-  static void saveRTree(RTree rtree, std::string fname);
+  static RTree getRTree(int indexRtree, std::string controllerPrefix);
+  static void saveRTree(RTree rtree, int indexRtree, std::string controllerPrefix);
 
   static RTreeController processInput(std::string fname, SplitHeuristic *heuristic);
 
-  static void checkCache();
+  static void checkCache(std::string controllerPrefix, bool forceClean = false);
 
-    //static void deleteFilename(std::string fname);
+  static void cleanControllerData(std::string controllerPrefix);
+
+
+  static long fileSpace(std::string filename);
+  static long spaceOccupied(std::string controllerPrefix);
+
+  static void cleanCache();
 
 
 };

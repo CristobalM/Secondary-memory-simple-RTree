@@ -92,7 +92,7 @@ Rectangle GreeneSplit::MBR(vRect &vect) {
       maxY2 = rect.y2;
     }
   }
-  return Rectangle(minX1, maxX2, minY1, maxY2, FilenameGenerator::generateNewIndex(), false);
+  return Rectangle(minX1, maxX2, minY1, maxY2, FilenameGenerator::generateNewIndex());
 }
 
 std::string GreeneSplit::heuristicName() {

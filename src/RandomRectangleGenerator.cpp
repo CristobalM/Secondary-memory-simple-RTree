@@ -7,6 +7,7 @@
 #include <random>
 #include <cstdio>
 #include "RandomRectangleGenerator.h"
+#include "commontypes.h"
 
 
 float getRandomFloat(int lower, int upper){
@@ -26,7 +27,7 @@ std::vector<float> RandomRectangleGenerator::generateRandomRect() {
   return coords;
 }
 
-void RandomRectangleGenerator::generateDataFile(int n, std::string filename) {
+void RandomRectangleGenerator::generateDataFile(int n, std::string filename){
   std::ofstream pFile;
   pFile.open(filename);
   for (int i=0; i<n; i++){
@@ -35,3 +36,14 @@ void RandomRectangleGenerator::generateDataFile(int n, std::string filename) {
   }
   pFile.close();
 }
+
+vRect RandomRectangleGenerator::generateVRect(int quantity){
+  vRect out;
+  for(int i = 0; i < quantity; i++){
+    std::vector<float> coords = generateRandomRect();
+    Rectangle rect(coords[0], coords[1], coords[2], coords[3]);
+    out.push_back(rect);
+  }
+  return out;
+}
+

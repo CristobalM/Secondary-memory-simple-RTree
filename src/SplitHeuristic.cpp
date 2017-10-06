@@ -66,7 +66,7 @@ std::pair<int, int> SplitHeuristic::mostDistantPair(vRect &vrect) {
 
 
 
-void SplitHeuristic::splitNode(RTree &rtree) {
+void SplitHeuristic::splitNode(RTree &rtree, std::string controllerPrefix) {
   vRect &vrect = rtree.node;
   if(vrect.size() < DEFAULT_MAX_NODE_SIZE + 1){
     return;
@@ -84,16 +84,13 @@ void SplitHeuristic::splitNode(RTree &rtree) {
   RTree rightRtree(splitted.right, splitted.rightParent.address, rtree.leaf, rtree.parentFilenameIndex, rtree.parentRectangleIndex);
 
 
-  IOControl::saveRTree(leftRtree, FilenameGenerator::getStringFromIndex(splitted.leftParent.address));
-  IOControl::saveRTree(rightRtree, FilenameGenerator::getStringFromIndex(splitted.rightParent.address));
-
-
   if(parentFilenameIndex != -1){
-    rtree = IOControl::getRTree(FilenameGenerator::getStringFromIndex(parentFilenameIndex));
+    rtree = IOControl::getRTree(parentFilenameIndex, controllerPrefix);
     rtree.node[parentRectangleIndex] = splitted.leftParent;
     rtree.node.push_back(splitted.rightParent);
     leftRtree.setParentRectangleIndex(parentRectangleIndex);
     rightRtree.setParentRectangleIndex((int)rtree.node.size() - 1);
+
   }
   else{
     rtree.node.push_back(splitted.leftParent);
@@ -102,9 +99,23 @@ void SplitHeuristic::splitNode(RTree &rtree) {
     rightRtree.setParentRectangleIndex(1);
   }
 
+  leftRtree.setParentFilenameIndex(rtree.inputFilenameIndex);
+  rightRtree.setParentFilenameIndex(rtree.inputFilenameIndex);
+
+
+
+  IOControl::saveRTree(leftRtree, splitted.leftParent.address, controllerPrefix);
+  IOControl::saveRTree(rightRtree, splitted.rightParent.address, controllerPrefix);
+
   rtree.leaf = false;
-  splitNode(rtree);
-  IOControl::saveRTree(rtree, FilenameGenerator::getStringFromIndex(rtree.getInputFilenameIndex()));
+
+  IOControl::saveRTree(leftRtree, leftRtree.getInputFilenameIndex(), controllerPrefix);
+  IOControl::saveRTree(rightRtree, rightRtree.getInputFilenameIndex(), controllerPrefix);
+  IOControl::saveRTree(rtree, rtree.getInputFilenameIndex(), controllerPrefix);
+
+
+  splitNode(rtree, controllerPrefix);
+
 }
 
 

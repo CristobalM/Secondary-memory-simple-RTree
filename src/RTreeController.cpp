@@ -9,38 +9,47 @@
 #include "SplitHeuristic.h"
 
 
-std::vector<int> RTreeController::search(RTree &rtree, Rectangle &rectangle) {
-  std::vector<int> found;
-  Rsearch(rtree, rectangle, found);
-  return found;
+std::vector<int> RTreeController::search(Rectangle &rectangle) {
+    std::vector<int> found;
+    beginAtRoot();
+    Rsearch(currentNode, rectangle, found);
+    return found;
 }
 
 void RTreeController::Rsearch(RTree &rtree, Rectangle &rectangle, std::vector<int> &found) {
-  if (rtree.isLeaf())
-  {
+  if (rtree.isLeaf()) {
     for (auto &node_rect : rtree.node) {
       if (node_rect.intersect(rectangle)) {
         found.push_back(node_rect.address);
       }
     }
-  } else {
+  }
+  else {
     for (auto &node_rect : rtree.node) {
       if (node_rect.intersect(rectangle)) {
-        std::string current_name = FilenameGenerator::getStringFromIndex(rtree.getInputFilenameIndex()); //"rtree" + std::to_string(save_number) + ".txt";
-        std::string next_name = FilenameGenerator::getStringFromIndex(node_rect.address);
-        IOControl::saveRTree(rtree, current_name);
-        rtree = IOControl::getRTree(next_name);
+        int current_index = rtree.getInputFilenameIndex();
+        IOControl::saveRTree(rtree, current_index, controllerPrefix);
+        rtree = IOControl::getRTree(node_rect.address, controllerPrefix);
         Rsearch(rtree, rectangle, found);
-        rtree = IOControl::getRTree(current_name);
+        rtree = IOControl::getRTree(current_index, controllerPrefix);
       }
     }
   }
 }
 
+
 void RTreeController::insert(Rectangle &rectangle) {
+    beginAtRoot();
+    insertRec(rectangle);
+}
+
+void RTreeController::insertRec(Rectangle &rectangle) {
     if (currentNode.leaf){
         currentNode.node.push_back(rectangle);
-        splitHeuristic->splitNode(currentNode);
+        splitHeuristic->splitNode(currentNode, controllerPrefix);
+        IOControl::saveRTree(currentNode,
+                             currentNode.getInputFilenameIndex(),
+                             controllerPrefix);
     } else {
         Rectangle min_rectangle;
         float req_gr = std::numeric_limits<float>::max();
@@ -66,23 +75,36 @@ void RTreeController::insert(Rectangle &rectangle) {
                     }
                 }
         }
-        std::string next_name = FilenameGenerator::getStringFromIndex(min_rectangle.address);
-        IOControl::saveRTree(currentNode, FilenameGenerator::getStringFromIndex(currentNode.getInputFilenameIndex()));
-        currentNode = IOControl::getRTree(next_name);
-        insert(rectangle);
+        //std::string next_name = FilenameGenerator::getStringFromIndex(min_rectangle.address, controllerPrefix);
+        IOControl::saveRTree(currentNode,
+                             currentNode.getInputFilenameIndex(),
+                             controllerPrefix);
+        currentNode = IOControl::getRTree(min_rectangle.address, controllerPrefix);
+        insertRec(rectangle);
     }
 }
 
 
-RTreeController::RTreeController(int rootFilenameIndex, SplitHeuristic *heuristic) : RTreeController(rootFilenameIndex, DEFAULT_MAX_NODE_SIZE, heuristic){}
+RTreeController::RTreeController(int rootFilenameIndex, SplitHeuristic *heuristic) :
+    RTreeController(rootFilenameIndex, DEFAULT_MAX_NODE_SIZE, heuristic){}
 
 RTreeController::RTreeController(int rootFilenameIndex, int memorySize, SplitHeuristic *heuristic) :
     rootFilenameIndex(rootFilenameIndex),
-    currentNode(IOControl::getRTree(FilenameGenerator::getStringFromIndex(rootFilenameIndex))),
+    controllerPrefix(FilenameGenerator::makeUuid()),
     memorySize(memorySize),
-    splitHeuristic(heuristic)
-{}
+    splitHeuristic(heuristic) {
+    currentNode = IOControl::getRTree(rootFilenameIndex, controllerPrefix);
+}
 
 int RTreeController::getRootFilenameIndex() const {
     return rootFilenameIndex;
 }
+
+std::string RTreeController::getControllerPrefix() {
+    return  controllerPrefix;
+}
+
+void RTreeController::beginAtRoot() {
+    currentNode = IOControl::getRTree(rootFilenameIndex, controllerPrefix);
+}
+

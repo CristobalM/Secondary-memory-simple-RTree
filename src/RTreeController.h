@@ -13,6 +13,11 @@ class RTreeController {
   int rootFilenameIndex;
   int memorySize;
   SplitHeuristic *splitHeuristic;
+  std::string controllerPrefix;
+
+  void insertRec(Rectangle &rectangle);
+  void Rsearch(RTree &rtree, Rectangle &rectangle, std::vector<int> &found);
+
 public:
   RTree currentNode;
 
@@ -22,11 +27,12 @@ public:
 
   void insert(Rectangle &rectangle);
 
-  std::vector<int> search(RTree &rtree, Rectangle &rectangle);
-  void Rsearch(RTree &rtree, Rectangle &rectangle, std::vector<int> &found);
+  std::vector<int> search(Rectangle &rectangle);
 
   int getRootFilenameIndex() const;
+  std::string getControllerPrefix();
 
+  void beginAtRoot();
 
 };
 

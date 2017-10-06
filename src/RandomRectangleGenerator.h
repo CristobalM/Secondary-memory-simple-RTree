@@ -7,11 +7,13 @@
 
 
 #include "Rectangle.h"
+#include "commontypes.h"
 
 class RandomRectangleGenerator {
 public:
   static void generateDataFile(int n, std::string filename);
   static std::vector<float> generateRandomRect();
+  static vRect generateVRect(int quantity);
 };
 
 

@@ -6,17 +6,22 @@
 #include "Rectangle.h"
 #include "commontypes.h"
 
-Rectangle::Rectangle(float x1, float x2, float y1, float y2, int address, bool isLeaf) :
+Rectangle::Rectangle(float x1, float x2, float y1, float y2, int address) :
   x1(x1), x2(x2), y1(y1), y2(y2), address(address) {}
+
+
+Rectangle::Rectangle(float x1, float x2, float y1, float y2) : x1(x1), x2(x2), y1(y1), y2(y2), address(-2) {
+}
+
+Rectangle::Rectangle() = default;
 
 float Rectangle::getArea(Rectangle &rectangle) {
   return (rectangle.x2 - rectangle.x1) * (rectangle.y2 - rectangle.y1);
 }
 
-Rectangle::Rectangle() = default;
 
 RectContainer findMBR(Rectangle &rect1, Rectangle &rect2){
-  RectContainer out;
+  RectContainer out{} ;
   out.leftX = std::min(rect1.x1, rect2.x1);
   out.rightX = std::max(rect1.x2, rect1.x2);
   out.bottomY = std::min(rect1.x1, rect2.x1);
@@ -67,7 +72,7 @@ bool Rectangle::intersect(Rectangle &otherRect) {
 }
 
 Rectangle Rectangle::deriveParent(int childaddr) {
-  return Rectangle(x1, x2, y1, y2, childaddr, false);
+  return Rectangle(x1, x2, y1, y2, childaddr);
 }
 
 void Rectangle::enlargeToContain(Rectangle &src) {
@@ -77,3 +82,4 @@ void Rectangle::enlargeToContain(Rectangle &src) {
   y1 = mbr.bottomY;
   x1 = mbr.topY;
 }
+

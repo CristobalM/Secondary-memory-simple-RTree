@@ -14,9 +14,10 @@ bool RTree::isLeaf() const {
 }
 
 RTree::RTree(vRect &node, int inputFilenameIndex, bool leaf, int parentFilenameIndex,
-             int parentRectangleIndex) : RTree(inputFilenameIndex) {
+             int parentRectangleIndex){
     this->node = node;
     this->leaf = leaf;
+    this->inputFilenameIndex = inputFilenameIndex;
     this->parentFilenameIndex = parentFilenameIndex;
     this->parentRectangleIndex = parentRectangleIndex;
 }
