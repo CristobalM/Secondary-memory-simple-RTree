@@ -34,6 +34,9 @@ public:
 
   void beginAtRoot();
 
+  vRect extractDataMBRS();
+  void extractDataMBRSRec(vRect &partial);
+
 };
 
 

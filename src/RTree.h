@@ -46,6 +46,7 @@ namespace boost{
     void serialize(Archive &ar, RTree &rTree, const unsigned int version) {
       ar & rTree.node;
       ar & rTree.leaf;
+      ar & rTree.inputFilenameIndex;
       ar & rTree.parentFilenameIndex;
       ar & rTree.parentRectangleIndex;
     }

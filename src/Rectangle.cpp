@@ -20,7 +20,7 @@ float Rectangle::getArea(Rectangle &rectangle) {
 }
 
 
-RectContainer findMBR(Rectangle &rect1, Rectangle &rect2){
+RectContainer Rectangle::findMBR(Rectangle &rect1, Rectangle &rect2){
   RectContainer out{} ;
   out.leftX = std::min(rect1.x1, rect2.x1);
   out.rightX = std::max(rect1.x2, rect1.x2);
@@ -29,7 +29,7 @@ RectContainer findMBR(Rectangle &rect1, Rectangle &rect2){
   return out;
 }
 
-RectContainer findMBR(vRect &vrect){
+Rectangle Rectangle::findMBR(vRect &vrect){
   float minX1, minY1;
   minX1 = minY1 = std::numeric_limits<float>::infinity();
   float maxX2, maxY2;
@@ -48,11 +48,7 @@ RectContainer findMBR(vRect &vrect){
       maxY2 = rect.y2;
     }
   }
-  RectContainer out;
-  out.leftX = minX1;
-  out.rightX = maxX2;
-  out.bottomY = minY1;
-  out.topY = maxY2;
+  Rectangle out(minX1, maxX2, minY1, maxY2);
   return out;
 }
 
@@ -71,8 +67,8 @@ bool Rectangle::intersect(Rectangle &otherRect) {
              (otherRect.y1 > this->y2));
 }
 
-Rectangle Rectangle::deriveParent(int childaddr) {
-  return Rectangle(x1, x2, y1, y2, childaddr);
+Rectangle Rectangle::deriveParent() {
+  return Rectangle(x1, x2, y1, y2);
 }
 
 void Rectangle::enlargeToContain(Rectangle &src) {

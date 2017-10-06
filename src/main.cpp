@@ -94,7 +94,7 @@ int main() {
             std::cout << percentageOutput << std::endl;
             std::cout << "Search time = ";
             std::cout << averageDuration << std::endl << std::endl;
-            IOControl::checkCache(controller.getControllerPrefix(), true);
+            //IOControl::checkCache(controller.getControllerPrefix(), true);
         }
         std::cout << std::endl << std::endl;
     }

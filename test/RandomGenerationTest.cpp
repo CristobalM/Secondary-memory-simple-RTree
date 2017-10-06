@@ -9,7 +9,7 @@
 #include "../src/RandomRectangleGenerator.h"
 #include "../src/IOControl.h"
 #include "../src/RTreeController.h"
-
+/*
 TEST(RandomGenerationTest, CanRead) {
     SplitHeuristic *heuristic = new LinearSplit();
     std::string input = "canread.txt";
@@ -20,3 +20,4 @@ TEST(RandomGenerationTest, CanRead) {
     delete heuristic;
 }
 
+ */

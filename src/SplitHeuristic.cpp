@@ -102,12 +102,10 @@ void SplitHeuristic::splitNode(RTree &rtree, std::string controllerPrefix) {
   leftRtree.setParentFilenameIndex(rtree.inputFilenameIndex);
   rightRtree.setParentFilenameIndex(rtree.inputFilenameIndex);
 
-
-
+    rtree.leaf = false;
   IOControl::saveRTree(leftRtree, splitted.leftParent.address, controllerPrefix);
   IOControl::saveRTree(rightRtree, splitted.rightParent.address, controllerPrefix);
 
-  rtree.leaf = false;
 
   IOControl::saveRTree(leftRtree, leftRtree.getInputFilenameIndex(), controllerPrefix);
   IOControl::saveRTree(rightRtree, rightRtree.getInputFilenameIndex(), controllerPrefix);

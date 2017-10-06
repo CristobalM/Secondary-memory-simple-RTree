@@ -43,9 +43,10 @@ RTree IOControl::getRTree(int indexRtree, std::string controllerPrefix) {
     if(Cached.find(fname) != Cached.end()){
         return Cached[fname];
     }
-    RTree out = RTree();
+    RTree out = RTree(indexRtree);
     std::ifstream ifs(fname);
     if(!ifs) {
+        out.inputFilenameIndex = indexRtree;
         Cached[fname] = out;
         return out;
     }

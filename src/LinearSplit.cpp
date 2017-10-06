@@ -26,8 +26,8 @@ splittedNode LinearSplit::split(vRect &vrect) {
   Rectangle &rect1 = vrect[distantRects.first];
   Rectangle &rect2 = vrect[distantRects.second];
 
-  Rectangle mbr1 = rect1.deriveParent(FilenameGenerator::generateNewIndex());
-  Rectangle mbr2 = rect2.deriveParent(FilenameGenerator::generateNewIndex());
+  Rectangle mbr1 = rect1.deriveParent();
+  Rectangle mbr2 = rect2.deriveParent();
 
 
   std::vector<long> randomPermutation = fisherYatesVariation(vrect.size(), vrect.size());

@@ -6,8 +6,12 @@
 #define tarea1_logaritmos_RECTANGLE_H
 
 #include <string>
+#include <vector>
 #include <boost/serialization/access.hpp>
 
+struct RectContainer{
+  float leftX, rightX, bottomY, topY;
+};
 class Rectangle{
 public:
   float x1, x2, y1, y2;
@@ -18,7 +22,7 @@ public:
   Rectangle(float x1, float x2, float y1, float y2);
 
 
-  Rectangle deriveParent(int childaddr);
+  Rectangle deriveParent();
 
   static float getArea(Rectangle &rectangle);
 
@@ -26,11 +30,12 @@ public:
 
   float areaIncrease(Rectangle &src);
   void enlargeToContain(Rectangle &src);
+
+  static Rectangle findMBR(std::vector<Rectangle> &vrect);
+
+  RectContainer findMBR(Rectangle &rect1, Rectangle &rect2);
 };
 
-struct RectContainer{
-  float leftX, rightX, bottomY, topY;
-};
 
 
 namespace boost{

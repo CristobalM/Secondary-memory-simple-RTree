@@ -108,3 +108,29 @@ void RTreeController::beginAtRoot() {
     currentNode = IOControl::getRTree(rootFilenameIndex, controllerPrefix);
 }
 
+
+//inefficient, only for debug
+vRect RTreeController::extractDataMBRS() {
+    beginAtRoot();
+    vRect out;
+    extractDataMBRSRec(out);
+    beginAtRoot();
+    return out;
+}
+
+void RTreeController::extractDataMBRSRec(vRect &partial) {
+    long sz = partial.size();
+    if(currentNode.isLeaf()){
+        partial.insert(partial.end(), currentNode.node.begin(), currentNode.node.end());
+    }
+    else {
+        int parentIndex = currentNode.inputFilenameIndex;
+        for (int i = 0; i < currentNode.node.size(); i++) {
+            Rectangle &rect = currentNode.node[i];
+            currentNode = IOControl::getRTree(rect.address, controllerPrefix);
+            extractDataMBRSRec(partial);
+            currentNode = IOControl::getRTree(parentIndex, controllerPrefix);
+        }
+    }
+}
+

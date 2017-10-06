@@ -6,6 +6,7 @@
 #include "FilenameGenerator.h"
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
+#include <sstream>
 
 int FilenameGenerator::index = -1;
 boost::uuids::random_generator FilenameGenerator::uuidgenerator;
@@ -23,7 +24,9 @@ std::string FilenameGenerator::getStringFromIndex(int index) {
 
 
 std::string FilenameGenerator::getStringFromIndex(int index, std::string prefix) {
-  return prefix + "_rtree" + std::to_string(index) + ".txt";
+  std::ostringstream oss;
+  oss << prefix << "_rtree" << index << ".txt";
+  return oss.str();
 }
 
 std::string FilenameGenerator::makeUuid() {
