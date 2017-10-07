@@ -3,11 +3,10 @@
 #include <fstream>
 #include "Rectangle.h"
 #include "SplitHeuristic.h"
-#include "LinearSplit.h"
+
 #include "RandomRectangleGenerator.h"
 #include "IOControl.h"
-#include "RTreeController.h"
-#include "GreeneSplit.h"
+
 #include "Experiments.h"
 #include "FilenameGenerator.h"
 
