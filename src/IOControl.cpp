@@ -50,7 +50,7 @@ std::shared_ptr<RTree> IOControl::getRTree(int indexRtree, std::string controlle
         return out;
     }
 
-    boost::archive::text_iarchive ia(ifs);
+    boost::archive::binary_iarchive ia(ifs);
     ia >> *out;
 
     Cached[fname] = out;
@@ -121,7 +121,7 @@ void IOControl::checkCache(std::string  controllerPrefix, CachingRTree &Cached, 
             current = it->second;
             if(saveFiles || !forceClean) {
                 std::ofstream ofs(FilenameGenerator::getStringFromIndex(current->inputFilenameIndex, controllerPrefix));
-                boost::archive::text_oarchive oa(ofs);
+                boost::archive::binary_oarchive oa(ofs);
                 oa << *current;
             }
         }
@@ -148,6 +148,20 @@ long IOControl::spaceOccupied(std::string controllerPrefix) {
         }
     }
     return total;
+}
+
+void IOControl::cleanControllerData(std::string controllerPrefix) {
+    boost::filesystem::path p(".");
+    boost::filesystem::directory_iterator end_itr;
+
+    for(boost::filesystem::directory_iterator itr(p); itr != end_itr; ++itr){
+        if(boost::filesystem::is_regular_file(itr->path())){
+            std::string current_file = itr->path().string();
+            if(boost::starts_with(current_file, "./"+controllerPrefix)){
+               boost::filesystem::remove(itr->path());
+            }
+        }
+    }
 }
 
 

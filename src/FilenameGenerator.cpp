@@ -16,11 +16,6 @@ int FilenameGenerator::generateNewIndex() {
   return FilenameGenerator::index;
 }
 
-/*
-std::string FilenameGenerator::getStringFromIndex(int index) {
-  return "rtree" + std::to_string(index) + ".txt";
-}
- */
 
 
 std::string FilenameGenerator::getStringFromIndex(int index, std::string prefix) {

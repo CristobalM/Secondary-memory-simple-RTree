@@ -94,7 +94,8 @@ int main() {
             std::cout << "Search time = ";
             std::cout << averageDuration << std::endl << std::endl;
             controller.Cached.clear();
-            IOControl::checkCache(controller.getControllerPrefix(), true, true);
+            IOControl::checkCache(controller.getControllerPrefix(), controller.Cached, true, false);
+            IOControl::cleanControllerData(controller.getControllerPrefix());
         }
         std::cout << std::endl << std::endl;
     }

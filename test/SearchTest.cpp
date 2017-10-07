@@ -10,7 +10,7 @@
 #include "../src/IOControl.h"
 #include "../src/GreeneSplit.h"
 
-/*
+
 TEST(SearchTest, BiggerIntersectsAll) {
     SplitHeuristic *heuristic = new GreeneSplit();
     std::string input = "canread2.txt";
@@ -25,8 +25,7 @@ TEST(SearchTest, BiggerIntersectsAll) {
     delete heuristic;
     EXPECT_EQ(result.size(), dataMBRS.size());
 }
-*/
-/*
+
 TEST(SearchTest, OutsideIntersectsNone) {
     SplitHeuristic *heuristic = new GreeneSplit();
     std::string input = "canread2.txt";
@@ -43,4 +42,4 @@ TEST(SearchTest, OutsideIntersectsNone) {
     delete heuristic;
     EXPECT_EQ(result.size(), 0);
 }
- */
+

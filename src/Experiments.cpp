@@ -24,7 +24,8 @@ ExperimentData& Experiments::stopExperiment() {
 long Experiments::averageRectanglesPerNode(RTreeController &controller) {
     controller.beginAtRoot();
     int node_quantity = 0;
-    long result = node_quantity > 0 ? averageRectanglesPerNodeRec(controller, &node_quantity)/node_quantity : 0;
+    long sum = averageRectanglesPerNodeRec(controller, &node_quantity);
+    long result = node_quantity > 0 ? sum/node_quantity : 0;
     controller.beginAtRoot();
     return result;
 }
