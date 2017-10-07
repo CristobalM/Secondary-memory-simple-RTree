@@ -17,6 +17,7 @@ struct splittedNode{
 
 class SplitHeuristic {
 public:
+  virtual ~SplitHeuristic() = default;
   virtual splittedNode split(vRect &vrect) = 0;
   virtual std::string heuristicName() = 0;
   std::pair<int, int> mostDistantPair(vRect &);
