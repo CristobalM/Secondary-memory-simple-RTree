@@ -9,7 +9,7 @@
 #include <boost/filesystem/operations.hpp>
 #include "../src/IOControl.h"
 
-
+/*
 TEST(SpaceOccupied, test1) {
     boost::filesystem::path p(".");
     boost::filesystem::directory_iterator end_itr;
@@ -34,3 +34,4 @@ TEST(SpaceOccupied, test1) {
 TEST(Startswith, test1){
     ASSERT_TRUE(boost::starts_with("22f24c0d", "22f1"));
 }
+ */

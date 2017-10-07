@@ -11,6 +11,9 @@
 #include "Experiments.h"
 #include "FilenameGenerator.h"
 
+#include <sys/resource.h>
+
+
 
 void writeToFile(std::string uuid, std::string file_name, std::string fileheader, std::vector<std::string> contents){
     std::ofstream ofs;
@@ -24,7 +27,7 @@ void writeToFile(std::string uuid, std::string file_name, std::string fileheader
     ofs.close();
 }
 
-int main() {
+void make_experiments(){
 
     SplitHeuristic *heuristics[2] = {new LinearSplit(), new GreeneSplit()};
 
@@ -51,20 +54,17 @@ int main() {
 
             long buildTime =experiment.retrieveTimeElapsedNanoSeconds();
             buildTimeStr = std::to_string(inputSize)+","+
-                heuristics[j]->heuristicName()+","+
-                std::to_string(buildTime);
+                           heuristics[j]->heuristicName()+","+
+                           std::to_string(buildTime);
 
 
             //search
-            long spaceOutput = IOControl::spaceOccupied(controller.getControllerPrefix());
-            spaceOutputStr =  std::to_string(inputSize)+","+
-                heuristics[j]->heuristicName()+","+
-                std::to_string(spaceOutput);
+
 
             float percentageOutput = (float)Experiments::averageRectanglesPerNode(controller) / (float)DEFAULT_MAX_NODE_SIZE;
             percentageOutputStr = std::to_string(inputSize)+","+
-                heuristics[j]->heuristicName()+","+
-                std::to_string(percentageOutput);
+                                  heuristics[j]->heuristicName()+","+
+                                  std::to_string(percentageOutput);
 
             long sumElapsedSearch = 0;
             for(Rectangle &randomRectangle : randomVRect){
@@ -76,8 +76,16 @@ int main() {
             long averageDuration = sumElapsedSearch / randomVRect.size();
 
             searchOutputStr = std::to_string(inputSize)+","+
-                heuristics[j]->heuristicName()+","+
-                std::to_string(averageDuration);
+                              heuristics[j]->heuristicName()+","+
+                              std::to_string(averageDuration);
+
+
+            IOControl::checkCache(controller.getControllerPrefix(), controller.Cached, true, true);
+
+            long spaceOutput = IOControl::spaceOccupied(controller.getControllerPrefix());
+            spaceOutputStr =  std::to_string(inputSize)+","+
+                              heuristics[j]->heuristicName()+","+
+                              std::to_string(spaceOutput);
 
 
             buildTimeOutput.push_back(buildTimeStr);
@@ -93,9 +101,9 @@ int main() {
             std::cout << percentageOutput << std::endl;
             std::cout << "Search time = ";
             std::cout << averageDuration << std::endl << std::endl;
-            controller.Cached.clear();
-            IOControl::checkCache(controller.getControllerPrefix(), controller.Cached, true, false);
             IOControl::cleanControllerData(controller.getControllerPrefix());
+            controller.Cached.clear();
+
         }
         std::cout << std::endl << std::endl;
     }
@@ -108,5 +116,32 @@ int main() {
 
     delete heuristics[0];
     delete heuristics[1];
+}
+
+void increaseStackSize(){
+    const rlim_t kStackSize = 1000 * 1024 * 1024;   // min stack size = 100 MB
+    struct rlimit rl;
+    int result;
+
+    result = getrlimit(RLIMIT_STACK, &rl);
+    if (result == 0)
+    {
+        if (rl.rlim_cur < kStackSize)
+        {
+            rl.rlim_cur = kStackSize;
+            result = setrlimit(RLIMIT_STACK, &rl);
+            if (result != 0)
+            {
+                fprintf(stderr, "setrlimit returned result = %d\n", result);
+            }
+        }
+    }
+
+}
+
+int main() {
+    increaseStackSize();
+    make_experiments();
+
     return 0;
 }

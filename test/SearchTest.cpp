@@ -10,7 +10,7 @@
 #include "../src/IOControl.h"
 #include "../src/GreeneSplit.h"
 
-
+/*
 TEST(SearchTest, BiggerIntersectsAll) {
     SplitHeuristic *heuristic = new GreeneSplit();
     std::string input = "canread2.txt";
@@ -41,5 +41,5 @@ TEST(SearchTest, OutsideIntersectsNone) {
     //IOControl::checkCache(controller.getControllerPrefix(), true);
     delete heuristic;
     EXPECT_EQ(result.size(), 0);
-}
+}*/
 
