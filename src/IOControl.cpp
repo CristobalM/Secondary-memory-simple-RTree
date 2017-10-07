@@ -17,7 +17,6 @@
 #include <boost/algorithm/string/predicate.hpp>
 
 int IOControl::estimatedCachedSize = 0;
-std::unordered_map<std::string, RTree> IOControl::Cached = std::unordered_map<std::string, RTree>();
 
 std::streampos fileSize( const char* filePath ){
 
@@ -32,32 +31,32 @@ std::streampos fileSize( const char* filePath ){
     return fsize;
 }
 
-void IOControl::saveRTree(RTree rtree, int indexRtree ,std::string controllerPrefix) {
+void IOControl::saveRTree(std::shared_ptr<RTree> rtree, int indexRtree ,std::string controllerPrefix, CachingRTree &Cached) {
     Cached[FilenameGenerator::getStringFromIndex(indexRtree, controllerPrefix)] = rtree;
-    estimatedCachedSize += rtree.node.size();
-    checkCache(controllerPrefix);
+    estimatedCachedSize += rtree->node.size();
+    checkCache(controllerPrefix, Cached);
 }
 
-RTree IOControl::getRTree(int indexRtree, std::string controllerPrefix) {
+std::shared_ptr<RTree> IOControl::getRTree(int indexRtree, std::string controllerPrefix, CachingRTree &Cached) {
     std::string fname = FilenameGenerator::getStringFromIndex(indexRtree, controllerPrefix);
     if(Cached.find(fname) != Cached.end()){
         return Cached[fname];
     }
-    RTree out = RTree(indexRtree);
+    std::shared_ptr<RTree> out(new RTree(indexRtree));
     std::ifstream ifs(fname);
     if(!ifs) {
-        out.inputFilenameIndex = indexRtree;
+        out->inputFilenameIndex = indexRtree;
         Cached[fname] = out;
         return out;
     }
 
     boost::archive::text_iarchive ia(ifs);
-    ia >> out;
+    ia >> *out;
 
     Cached[fname] = out;
-    estimatedCachedSize += out.node.size();
+    estimatedCachedSize += out->node.size();
 
-    checkCache(controllerPrefix);
+    checkCache(controllerPrefix, Cached);
     return out;
 }
 
@@ -108,17 +107,23 @@ RTreeController IOControl::processInput(std::string fname, SplitHeuristic *heuri
     }
     saveRTree(controller.currentNode,
               controller.getRootFilenameIndex(),
-              controller.getControllerPrefix());
+              controller.getControllerPrefix(),
+              controller.Cached);
     return controller;
 }
 
-void IOControl::checkCache(std::string controllerPrefix, bool forceClean) {
-    if(estimatedCachedSize > DEFAULT_MAX_MEM_SIZE || forceClean){
+void IOControl::checkCache(std::string  controllerPrefix, CachingRTree &Cached, bool forceClean, bool saveFiles) {
+    unsigned int cachedMaxSize = (unsigned int) Cached.max_size();
+    unsigned int maxSz = DEFAULT_MAX_MEM_SIZE > cachedMaxSize ? cachedMaxSize : DEFAULT_MAX_MEM_SIZE;
+    if(estimatedCachedSize > maxSz || forceClean){
         for(auto it = Cached.begin(); it != Cached.end(); it++){
-            RTree &current = (*it).second;
-            std::ofstream ofs(FilenameGenerator::getStringFromIndex(current.inputFilenameIndex, controllerPrefix));
-            boost::archive::text_oarchive oa(ofs);
-            oa << current;
+            std::shared_ptr<RTree>current;
+            current = it->second;
+            if(saveFiles || !forceClean) {
+                std::ofstream ofs(FilenameGenerator::getStringFromIndex(current->inputFilenameIndex, controllerPrefix));
+                boost::archive::text_oarchive oa(ofs);
+                oa << *current;
+            }
         }
 
         Cached.clear();
@@ -137,7 +142,7 @@ long IOControl::spaceOccupied(std::string controllerPrefix) {
     for(boost::filesystem::directory_iterator itr(p); itr != end_itr; ++itr){
         if(boost::filesystem::is_regular_file(itr->path())){
             std::string current_file = itr->path().string();
-            if(boost::starts_with(current_file, controllerPrefix)){
+            if(boost::starts_with(current_file, "./"+controllerPrefix)){
                 total += boost::filesystem::file_size(itr->path());
             }
         }
@@ -145,10 +150,6 @@ long IOControl::spaceOccupied(std::string controllerPrefix) {
     return total;
 }
 
-void IOControl::cleanCache() {
-    Cached = std::unordered_map<std::string, RTree>();
-    estimatedCachedSize = 0;
-}
 
 
 

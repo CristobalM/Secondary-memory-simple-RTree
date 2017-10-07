@@ -66,53 +66,53 @@ std::pair<int, int> SplitHeuristic::mostDistantPair(vRect &vrect) {
 
 
 
-void SplitHeuristic::splitNode(RTree &rtree, std::string controllerPrefix) {
-  vRect &vrect = rtree.node;
+void SplitHeuristic::splitNode(std::shared_ptr<RTree> rtree, std::string controllerPrefix, CachingRTree &Cached) {
+  vRect &vrect = rtree->node;
   if(vrect.size() < DEFAULT_MAX_NODE_SIZE + 1){
     return;
   }
   splittedNode splitted = split(vrect);
 
-  int parentFilenameIndex = rtree.parentFilenameIndex;
-  int parentRectangleIndex = rtree.parentRectangleIndex;
+  int parentFilenameIndex = rtree->parentFilenameIndex;
+  int parentRectangleIndex = rtree->parentRectangleIndex;
 
   splitted.leftParent.address = FilenameGenerator::generateNewIndex();
   splitted.rightParent.address = FilenameGenerator::generateNewIndex();
 
 
-  RTree leftRtree(splitted.left, splitted.leftParent.address, rtree.leaf, rtree.parentFilenameIndex, rtree.parentRectangleIndex);
-  RTree rightRtree(splitted.right, splitted.rightParent.address, rtree.leaf, rtree.parentFilenameIndex, rtree.parentRectangleIndex);
+  std::shared_ptr<RTree> leftRtree(new RTree(splitted.left, splitted.leftParent.address, rtree->leaf, rtree->parentFilenameIndex, rtree->parentRectangleIndex));
+  std::shared_ptr<RTree> rightRtree(new RTree(splitted.right, splitted.rightParent.address, rtree->leaf, rtree->parentFilenameIndex, rtree->parentRectangleIndex));
 
 
-  if(parentFilenameIndex != -1){
-    rtree = IOControl::getRTree(parentFilenameIndex, controllerPrefix);
-    rtree.node[parentRectangleIndex] = splitted.leftParent;
-    rtree.node.push_back(splitted.rightParent);
-    leftRtree.setParentRectangleIndex(parentRectangleIndex);
-    rightRtree.setParentRectangleIndex((int)rtree.node.size() - 1);
+  if(parentFilenameIndex > -1){
+    rtree = IOControl::getRTree(parentFilenameIndex, controllerPrefix, Cached);
+    rtree->node[parentRectangleIndex] = splitted.leftParent;
+    rtree->node.push_back(splitted.rightParent);
+    leftRtree->setParentRectangleIndex(parentRectangleIndex);
+    rightRtree->setParentRectangleIndex((int)rtree->node.size() - 1);
 
   }
   else{
-    rtree.node.push_back(splitted.leftParent);
-    rtree.node.push_back(splitted.rightParent);
-    leftRtree.setParentRectangleIndex(0);
-    rightRtree.setParentRectangleIndex(1);
+    rtree->node.push_back(splitted.leftParent);
+    rtree->node.push_back(splitted.rightParent);
+    leftRtree->setParentRectangleIndex(0);
+    rightRtree->setParentRectangleIndex(1);
   }
 
-  leftRtree.setParentFilenameIndex(rtree.inputFilenameIndex);
-  rightRtree.setParentFilenameIndex(rtree.inputFilenameIndex);
+  leftRtree->setParentFilenameIndex(rtree->inputFilenameIndex);
+  rightRtree->setParentFilenameIndex(rtree->inputFilenameIndex);
 
-    rtree.leaf = false;
-  IOControl::saveRTree(leftRtree, splitted.leftParent.address, controllerPrefix);
-  IOControl::saveRTree(rightRtree, splitted.rightParent.address, controllerPrefix);
-
-
-  IOControl::saveRTree(leftRtree, leftRtree.getInputFilenameIndex(), controllerPrefix);
-  IOControl::saveRTree(rightRtree, rightRtree.getInputFilenameIndex(), controllerPrefix);
-  IOControl::saveRTree(rtree, rtree.getInputFilenameIndex(), controllerPrefix);
+    rtree->leaf = false;
+  IOControl::saveRTree(leftRtree, splitted.leftParent.address, controllerPrefix, Cached);
+  IOControl::saveRTree(rightRtree, splitted.rightParent.address, controllerPrefix, Cached);
 
 
-  splitNode(rtree, controllerPrefix);
+  IOControl::saveRTree(leftRtree, leftRtree->getInputFilenameIndex(), controllerPrefix, Cached);
+  IOControl::saveRTree(rightRtree, rightRtree->getInputFilenameIndex(), controllerPrefix, Cached);
+  IOControl::saveRTree(rtree, rtree->getInputFilenameIndex(), controllerPrefix, Cached);
+
+
+  splitNode(rtree, controllerPrefix, Cached);
 
 }
 

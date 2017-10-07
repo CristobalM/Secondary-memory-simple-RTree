@@ -41,7 +41,6 @@ int main() {
         RandomRectangleGenerator::generateDataFile(inputSize, input);
         vRect randomVRect = RandomRectangleGenerator::generateVRect(1000);
         for(int j = 0; j <= 1; j++) {
-            IOControl::cleanCache();
             //construction
             std::cout << heuristics[j]->heuristicName() << std::endl;
             Experiments::startExperiment("Build Rtree");
@@ -94,7 +93,8 @@ int main() {
             std::cout << percentageOutput << std::endl;
             std::cout << "Search time = ";
             std::cout << averageDuration << std::endl << std::endl;
-            //IOControl::checkCache(controller.getControllerPrefix(), true);
+            controller.Cached.clear();
+            IOControl::checkCache(controller.getControllerPrefix(), true, true);
         }
         std::cout << std::endl << std::endl;
     }

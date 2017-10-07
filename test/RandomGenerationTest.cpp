@@ -9,15 +9,15 @@
 #include "../src/RandomRectangleGenerator.h"
 #include "../src/IOControl.h"
 #include "../src/RTreeController.h"
-/*
+
 TEST(RandomGenerationTest, CanRead) {
     SplitHeuristic *heuristic = new LinearSplit();
     std::string input = "canread.txt";
-    RandomRectangleGenerator::generateDataFile(114, input);
+    RandomRectangleGenerator::generateDataFile(15000, input);
     RTreeController controller = IOControl::processInput(input, heuristic);
-    IOControl::checkCache(controller.getControllerPrefix(), true);
+    IOControl::checkCache(controller.getControllerPrefix(), controller.Cached, true, true);
 
     delete heuristic;
 }
 
- */
+

@@ -7,8 +7,10 @@
 
 
 #include <vector>
+#include <memory>
 #include "Rectangle.h"
 #include "commontypes.h"
+
 
 class RTree{
   friend class RTreeController;
@@ -16,9 +18,11 @@ public:
   vRect node;
   bool leaf = true;
 
-  int inputFilenameIndex;
+  int inputFilenameIndex = -1;
   int parentFilenameIndex = -1;
   int parentRectangleIndex = -1;
+
+  ~RTree(){}
 
   template<class Archive>
   friend void boost::serialization::serialize(Archive &, RTree &, const unsigned int);
@@ -39,6 +43,8 @@ public:
 
   //float required_growth(Rectangle &rectangle1, Rectangle &rectangle2);
 };
+
+typedef std::unordered_map<std::string, std::shared_ptr<RTree> > CachingRTree;
 
 namespace boost{
   namespace serialization{

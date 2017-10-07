@@ -30,19 +30,19 @@ long Experiments::averageRectanglesPerNode(RTreeController &controller) {
 }
 
 long Experiments::averageRectanglesPerNodeRec(RTreeController &controller, int *quantity_ptr) {
-    long currentNodeQuantity = controller.currentNode.node.size();
+    long currentNodeQuantity = controller.currentNode->node.size();
     (*quantity_ptr)++;
-    if(controller.currentNode.isLeaf()){
+    if(controller.currentNode->isLeaf()){
         return currentNodeQuantity;
     }
     else{
         long childrenSum = 0;
-        int parentIndex = controller.currentNode.inputFilenameIndex;
+        int parentIndex = controller.currentNode->inputFilenameIndex;
 
-        for(Rectangle &rect : controller.currentNode.node){
-            controller.currentNode = IOControl::getRTree(rect.address, controller.getControllerPrefix());
+        for(Rectangle &rect : controller.currentNode->node){
+            controller.currentNode = IOControl::getRTree(rect.address, controller.getControllerPrefix(), controller.Cached);
             childrenSum += averageRectanglesPerNodeRec(controller, quantity_ptr);
-            controller.currentNode = IOControl::getRTree(parentIndex, controller.getControllerPrefix());
+            controller.currentNode = IOControl::getRTree(parentIndex, controller.getControllerPrefix(), controller.Cached);
         }
         return childrenSum + currentNodeQuantity;
     }

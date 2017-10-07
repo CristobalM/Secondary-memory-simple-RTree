@@ -16,10 +16,12 @@ class RTreeController {
   std::string controllerPrefix;
 
   void insertRec(Rectangle &rectangle);
-  void Rsearch(RTree &rtree, Rectangle &rectangle, std::vector<int> &found);
+  void Rsearch(std::shared_ptr<RTree> rtree, Rectangle &rectangle, std::vector<int> &found);
 
 public:
-  RTree currentNode;
+  std::shared_ptr<RTree> currentNode;
+
+  CachingRTree Cached;
 
 
   explicit RTreeController(int rootFilenameIndex, SplitHeuristic *heuristic);

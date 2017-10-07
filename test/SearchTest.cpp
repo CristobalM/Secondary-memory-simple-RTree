@@ -8,11 +8,13 @@
 #include "../src/RTreeController.h"
 #include "../src/RandomRectangleGenerator.h"
 #include "../src/IOControl.h"
+#include "../src/GreeneSplit.h"
 
+/*
 TEST(SearchTest, BiggerIntersectsAll) {
-    SplitHeuristic *heuristic = new LinearSplit();
+    SplitHeuristic *heuristic = new GreeneSplit();
     std::string input = "canread2.txt";
-    RandomRectangleGenerator::generateDataFile(114, input);
+    RandomRectangleGenerator::generateDataFile(5000, input);
     RTreeController controller = IOControl::processInput(input, heuristic);
 
     vRect dataMBRS = controller.extractDataMBRS();
@@ -23,14 +25,15 @@ TEST(SearchTest, BiggerIntersectsAll) {
     delete heuristic;
     EXPECT_EQ(result.size(), dataMBRS.size());
 }
-
+*/
+/*
 TEST(SearchTest, OutsideIntersectsNone) {
-    SplitHeuristic *heuristic = new LinearSplit();
+    SplitHeuristic *heuristic = new GreeneSplit();
     std::string input = "canread2.txt";
-    RandomRectangleGenerator::generateDataFile(114, input);
+    RandomRectangleGenerator::generateDataFile(5000, input);
     RTreeController controller = IOControl::processInput(input, heuristic);
 
-    Rectangle query(100000, 100001, 100000, 100001);
+    Rectangle query(1000000, 1000001, 1000000, 1000001);
 
     //vRect dataMBRS = controller.extractDataMBRS();
    // Rectangle query = Rectangle::findMBR(dataMBRS);
@@ -40,3 +43,4 @@ TEST(SearchTest, OutsideIntersectsNone) {
     delete heuristic;
     EXPECT_EQ(result.size(), 0);
 }
+ */

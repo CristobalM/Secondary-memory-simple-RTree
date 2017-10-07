@@ -16,22 +16,22 @@ std::vector<int> RTreeController::search(Rectangle &rectangle) {
     return found;
 }
 
-void RTreeController::Rsearch(RTree &rtree, Rectangle &rectangle, std::vector<int> &found) {
-  if (rtree.isLeaf()) {
-    for (auto &node_rect : rtree.node) {
+void RTreeController::Rsearch(std::shared_ptr<RTree> rtree, Rectangle &rectangle, std::vector<int> &found) {
+  if (rtree->isLeaf()) {
+    for (auto &node_rect : rtree->node) {
       if (node_rect.intersect(rectangle)) {
         found.push_back(node_rect.address);
       }
     }
   }
   else {
-    for (auto &node_rect : rtree.node) {
+    for (auto &node_rect : rtree->node) {
       if (node_rect.intersect(rectangle)) {
-        int current_index = rtree.getInputFilenameIndex();
-        IOControl::saveRTree(rtree, current_index, controllerPrefix);
-        rtree = IOControl::getRTree(node_rect.address, controllerPrefix);
+        int current_index = rtree->getInputFilenameIndex();
+        IOControl::saveRTree(rtree, current_index, controllerPrefix, Cached);
+        rtree = IOControl::getRTree(node_rect.address, controllerPrefix, Cached);
         Rsearch(rtree, rectangle, found);
-        rtree = IOControl::getRTree(current_index, controllerPrefix);
+        rtree = IOControl::getRTree(current_index, controllerPrefix, Cached);
       }
     }
   }
@@ -44,17 +44,18 @@ void RTreeController::insert(Rectangle &rectangle) {
 }
 
 void RTreeController::insertRec(Rectangle &rectangle) {
-    if (currentNode.leaf){
-        currentNode.node.push_back(rectangle);
-        splitHeuristic->splitNode(currentNode, controllerPrefix);
+    if (currentNode->leaf){
+        currentNode->node.push_back(rectangle);
+        splitHeuristic->splitNode(currentNode, controllerPrefix, Cached);
         IOControl::saveRTree(currentNode,
-                             currentNode.getInputFilenameIndex(),
-                             controllerPrefix);
+                             currentNode->getInputFilenameIndex(),
+                             controllerPrefix,
+                             Cached);
     } else {
         Rectangle min_rectangle;
         float req_gr = std::numeric_limits<float>::max();
         float area = std::numeric_limits<float>::max();
-        for (auto &node_rect : currentNode.node) {
+        for (auto &node_rect : currentNode->node) {
             float new_req_gr = node_rect.areaIncrease(rectangle);
             float new_area = Rectangle::getArea(node_rect);
                 if (new_req_gr < req_gr){
@@ -77,9 +78,10 @@ void RTreeController::insertRec(Rectangle &rectangle) {
         }
         //std::string next_name = FilenameGenerator::getStringFromIndex(min_rectangle.address, controllerPrefix);
         IOControl::saveRTree(currentNode,
-                             currentNode.getInputFilenameIndex(),
-                             controllerPrefix);
-        currentNode = IOControl::getRTree(min_rectangle.address, controllerPrefix);
+                             currentNode->getInputFilenameIndex(),
+                             controllerPrefix,
+                             Cached);
+        currentNode = IOControl::getRTree(min_rectangle.address, controllerPrefix, Cached);
         insertRec(rectangle);
     }
 }
@@ -93,7 +95,7 @@ RTreeController::RTreeController(int rootFilenameIndex, int memorySize, SplitHeu
     controllerPrefix(FilenameGenerator::makeUuid()),
     memorySize(memorySize),
     splitHeuristic(heuristic) {
-    currentNode = IOControl::getRTree(rootFilenameIndex, controllerPrefix);
+    currentNode = IOControl::getRTree(rootFilenameIndex, controllerPrefix, Cached);
 }
 
 int RTreeController::getRootFilenameIndex() const {
@@ -105,7 +107,7 @@ std::string RTreeController::getControllerPrefix() {
 }
 
 void RTreeController::beginAtRoot() {
-    currentNode = IOControl::getRTree(rootFilenameIndex, controllerPrefix);
+    currentNode = IOControl::getRTree(rootFilenameIndex, controllerPrefix, Cached);
 }
 
 
@@ -120,16 +122,16 @@ vRect RTreeController::extractDataMBRS() {
 
 void RTreeController::extractDataMBRSRec(vRect &partial) {
     long sz = partial.size();
-    if(currentNode.isLeaf()){
-        partial.insert(partial.end(), currentNode.node.begin(), currentNode.node.end());
+    if(currentNode->isLeaf()){
+        partial.insert(partial.end(), currentNode->node.begin(), currentNode->node.end());
     }
     else {
-        int parentIndex = currentNode.inputFilenameIndex;
-        for (int i = 0; i < currentNode.node.size(); i++) {
-            Rectangle &rect = currentNode.node[i];
-            currentNode = IOControl::getRTree(rect.address, controllerPrefix);
+        int parentIndex = currentNode->inputFilenameIndex;
+        for (int i = 0; i < currentNode->node.size(); i++) {
+            Rectangle &rect = currentNode->node[i];
+            currentNode = IOControl::getRTree(rect.address, controllerPrefix, Cached);
             extractDataMBRSRec(partial);
-            currentNode = IOControl::getRTree(parentIndex, controllerPrefix);
+            currentNode = IOControl::getRTree(parentIndex, controllerPrefix, Cached);
         }
     }
 }

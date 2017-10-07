@@ -19,9 +19,13 @@ endif()
 
 
 
-add_executable(tests IOControlTest.cpp RandomGenerationTest.cpp SearchTest.cpp ${SOURCE_FILES} RandomGenerationTest.cpp SearchTest.cpp)
+add_executable(tests IOControlTest.cpp ${SOURCE_FILES} RandomGenerationTest.cpp SearchTest.cpp)
 
 target_link_libraries(tests RTreeLib gtest gtest_main)
+
+
+add_executable(auxtests AuxTests.cpp ${SOURCE_FILES})
+target_link_libraries(auxtests RTreeLib gtest gtest_main)
 
 
 
@@ -30,5 +34,6 @@ if(NOT MSVC)
     if (Boost_FOUND)
         include_directories(${Boost_INCLUDE_DIRS})
         target_link_libraries(tests ${Boost_LIBRARIES})
+        target_link_libraries(auxtests ${Boost_LIBRARIES})
     endif()
 endif()
