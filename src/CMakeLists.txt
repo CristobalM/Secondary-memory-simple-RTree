@@ -16,6 +16,7 @@ endif()
 add_executable(${TARGET_NAME} main.cpp)
 add_executable(BoostRTreeComparison BoostRTreeComparison.cpp)
 target_link_libraries(${TARGET_NAME} RTreeLib)
+target_link_libraries(BoostRTreeComparison RTreeLib)
 
 
 
