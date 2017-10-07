@@ -4,10 +4,23 @@
 
 
 #include <gtest/gtest.h>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/filesystem/path.hpp>
 #include <boost/filesystem/operations.hpp>
-#include "../src/IOControl.h"
+#include <fstream>
+
+
+TEST(CreateFolder, Folder1) {
+    std::string output_folder = "output_folder";
+
+    if(!boost::filesystem::exists(output_folder)){
+    boost::filesystem::create_directory(output_folder);
+    }
+    EXPECT_TRUE(boost::filesystem::exists(output_folder));
+
+    std::string filename = output_folder +"/hola";
+    std::ofstream ofs(filename);
+    ofs << "bullshit";
+    EXPECT_TRUE(boost::filesystem::exists(filename));
+}
 
 /*
 TEST(SpaceOccupied, test1) {
