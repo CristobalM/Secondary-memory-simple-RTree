@@ -12,12 +12,17 @@
 #include "FilenameGenerator.h"
 
 #include <sys/resource.h>
-
+#include <boost/filesystem/operations.hpp>
 
 
 void writeToFile(std::string uuid, std::string file_name, std::string fileheader, std::vector<std::string> contents){
+    std::string output_folder = "output_folder";
+    if(!boost::filesystem::exists(output_folder)){
+        boost::filesystem::create_directory(output_folder);
+    }
+
     std::ofstream ofs;
-    ofs.open(uuid+file_name);
+    ofs.open(output_folder+"/"+uuid+file_name);
     ofs << fileheader;
     ofs << "\n";
     for(std::string &s : contents){
@@ -119,7 +124,7 @@ void make_experiments(){
 }
 
 void increaseStackSize(){
-    const rlim_t kStackSize = 1000 * 1024 * 1024;   // min stack size = 100 MB
+    const rlim_t kStackSize = 2000 * 1024 * 1024;   // min stack size = 100 MB
     struct rlimit rl;
     int result;
 
