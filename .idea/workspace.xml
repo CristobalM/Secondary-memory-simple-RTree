@@ -19,7 +19,6 @@
   <component name="ChangeListManager">
     <list default="true" id="59215a4b-b69b-45f6-a444-def61d73fa9e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BoostRTreeComparison.cpp" afterPath="$PROJECT_DIR$/src/BoostRTreeComparison.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.cpp" afterPath="$PROJECT_DIR$/src/main.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -52,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="25" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
+            <state relative-caret-position="136">
+              <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -122,10 +121,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BoostRTreeComparison.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BoostRTreeComparison.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/BoostRTreeComparison.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3128">
+            <state relative-caret-position="277">
               <caret line="184" column="27" lean-forward="false" selection-start-line="184" selection-start-column="27" selection-end-line="184" selection-end-column="27" />
               <folding>
                 <element signature="e#44#63#0" expanded="true" />
@@ -226,8 +225,8 @@
         <option value="$PROJECT_DIR$/src/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/src/BoostRTree.cpp" />
         <option value="$PROJECT_DIR$/src/BoostRTree.h" />
-        <option value="$PROJECT_DIR$/src/main.cpp" />
         <option value="$PROJECT_DIR$/src/BoostRTreeComparison.cpp" />
+        <option value="$PROJECT_DIR$/src/main.cpp" />
       </list>
     </option>
   </component>
@@ -317,7 +316,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.BoostRTreeComparison">
+  <component name="RunManager" selected="Application.logaritmos_tarea1">
     <configuration name="BoostRTreeComparison" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="logaritmos_tarea1" TARGET_NAME="BoostRTreeComparison" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="logaritmos_tarea1" RUN_TARGET_NAME="BoostRTreeComparison">
       <envs />
     </configuration>
@@ -677,7 +676,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507416917790</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Moving to BoostRTreeComparison.cpp">
+      <created>1507417261705</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1507417261705</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -713,7 +719,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118901000" />
+    <option name="totallyTimeSpent" value="120158000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1303" height="780" extended-state="6" />
@@ -774,7 +780,8 @@
     <MESSAGE value="Increased stack limit and works until 2^25 of data" />
     <MESSAGE value="Merge branch 'master' of https://github.com/CristobalM/logaritmos_tarea1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="Add RTreeBoostExperiment" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add RTreeBoostExperiment" />
+    <MESSAGE value="Moving to BoostRTreeComparison.cpp" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moving to BoostRTreeComparison.cpp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1068,21 +1075,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="25" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BoostRTreeComparison.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3128">
+        <state relative-caret-position="277">
           <caret line="184" column="27" lean-forward="false" selection-start-line="184" selection-start-column="27" selection-end-line="184" selection-end-column="27" />
           <folding>
             <element signature="e#44#63#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>

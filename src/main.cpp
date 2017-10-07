@@ -3,71 +3,18 @@
 #include <fstream>
 #include "Rectangle.h"
 #include "SplitHeuristic.h"
-
+#include "LinearSplit.h"
 #include "RandomRectangleGenerator.h"
 #include "IOControl.h"
-
+#include "RTreeController.h"
+#include "GreeneSplit.h"
 #include "Experiments.h"
 #include "FilenameGenerator.h"
 
 #include <sys/resource.h>
 #include <boost/filesystem/operations.hpp>
 
-#include <boost/geometry.hpp>
-#include <boost/foreach.hpp>
 
-namespace bg = boost::geometry;
-namespace bgi = boost::geometry::index;
-typedef bg::model::point<float, 2, bg::cs::cartesian> point;
-typedef bg::model::box<point> box;
-typedef std::pair<box, unsigned> value;
-
-void processInputBoostExperiment(std::string fname, bgi::rtree< value, bgi::quadratic<113> > rtree){
-    std::ifstream infile(fname);
-    int index = 0;
-    while (infile) {
-        std::string s;
-        if (!getline(infile, s)) break;
-        std::istringstream ss(s);
-        std::vector <std::string> record;
-        int count = 0;
-        float minX, maxX, minY, maxY;
-        minX = minY = std::numeric_limits<float>::infinity();
-        maxX = maxY = -std::numeric_limits<float>::infinity();
-        while (ss){
-            std::string s2;
-            if (!getline( ss, s2, ',')){
-                break;
-            }
-            float coordinate = (float) ::atof(s2.c_str());
-            if(count % 2 == 0){
-                if(minX > coordinate){
-                    minX = coordinate;
-                }
-                if(maxX < coordinate){
-                    maxX = coordinate;
-                }
-            }
-            else{
-                if(minY > coordinate){
-                    minY = coordinate;
-                }
-                if(maxY < coordinate){
-                    maxY = coordinate;
-                }
-            }
-            count++;
-        }
-        Rectangle mbr(minX, maxX, minY, maxY, index);
-        box b(point(mbr.x1, mbr.y1), point(mbr.x2, mbr.y2));
-        rtree.insert(std::make_pair(b, index));
-        index++;
-    }
-    if (!infile.eof()) {
-        std::cerr << "Error during input file processing\n";
-    }
-
-}
 void writeToFile(std::string uuid, std::string file_name, std::string fileheader, std::vector<std::string> contents){
     std::string output_folder = "output_folder";
     if(!boost::filesystem::exists(output_folder)){
@@ -85,66 +32,82 @@ void writeToFile(std::string uuid, std::string file_name, std::string fileheader
     ofs.close();
 }
 
-void boostRTreeExperiment(){
+void make_experiments(){
 
-    namespace bg = boost::geometry;
-    namespace bgi = boost::geometry::index;
-    typedef bg::model::point<float, 2, bg::cs::cartesian> point;
-    typedef bg::model::box<point> box;
-    typedef std::pair<box, unsigned> value;
+    SplitHeuristic *heuristics[2] = {new LinearSplit(), new GreeneSplit()};
 
     std::vector<std::string> buildTimeOutput;
+    std::vector<std::string> occupiedSpaceOutput;
+    std::vector<std::string> pageDiskPercentageOutput;
     std::vector<std::string> searchTimeOutput;
 
+
     for (int i = 9; i <= 25; i++){
-        bgi::rtree< value, bgi::quadratic<113> > rtree;
         std::string input = "generated2e" + std::to_string(i)  + ".txt";
         const int inputSize = 1 << i; // (int)std::pow(2, i);
         std::cout << "input size:" << inputSize << std::endl;
         RandomRectangleGenerator::generateDataFile(inputSize, input);
         vRect randomVRect = RandomRectangleGenerator::generateVRect(inputSize/10);
         for(int j = 0; j <= 1; j++) {
+            //construction
+            std::cout << heuristics[j]->heuristicName() << std::endl;
             Experiments::startExperiment("Build Rtree");
-            processInputBoostExperiment(input, rtree);
+            RTreeController controller = IOControl::processInput(input, heuristics[j]);
             ExperimentData &experiment = Experiments::stopExperiment();
 
-            std::string buildTimeStr, searchOutputStr;
+            std::string buildTimeStr, spaceOutputStr, percentageOutputStr, searchOutputStr;
 
             long buildTime =experiment.retrieveTimeElapsedNanoSeconds();
             buildTimeStr = std::to_string(inputSize)+","+
+                           heuristics[j]->heuristicName()+","+
                            std::to_string(buildTime);
 
 
             //search
+
+
+            float percentageOutput = (float)Experiments::averageRectanglesPerNode(controller) / (float)DEFAULT_MAX_NODE_SIZE;
+            percentageOutputStr = std::to_string(inputSize)+","+
+                                  heuristics[j]->heuristicName()+","+
+                                  std::to_string(percentageOutput);
+
             long sumElapsedSearch = 0;
-
-
-            std::vector<box> boxes;
-
             for(Rectangle &randomRectangle : randomVRect){
-                box query_box(point(randomRectangle.x1, randomRectangle.y1), point(randomRectangle.x2, randomRectangle.y2));
-                boxes.push_back(query_box);
-            }
-
-            for(box &randomBox : boxes){
-                std::vector<value> result_s;
                 Experiments::startExperiment("search");
-                rtree.query(bgi::intersects(randomBox), std::back_inserter(result_s));
+                controller.search(randomRectangle);
                 ExperimentData &searchExperiment = Experiments::stopExperiment();
                 sumElapsedSearch += searchExperiment.retrieveTimeElapsedNanoSeconds();
             }
             long averageDuration = sumElapsedSearch / randomVRect.size();
 
             searchOutputStr = std::to_string(inputSize)+","+
+                              heuristics[j]->heuristicName()+","+
                               std::to_string(averageDuration);
 
+
+            IOControl::checkCache(controller.getControllerPrefix(), controller.Cached, true, true);
+
+            long spaceOutput = IOControl::spaceOccupied(controller.getControllerPrefix());
+            spaceOutputStr =  std::to_string(inputSize)+","+
+                              heuristics[j]->heuristicName()+","+
+                              std::to_string(spaceOutput);
+
+
             buildTimeOutput.push_back(buildTimeStr);
+            occupiedSpaceOutput.push_back(spaceOutputStr);
+            pageDiskPercentageOutput.push_back(percentageOutputStr);
             searchTimeOutput.push_back(searchOutputStr);
 
             std::cout << "Build Time = ";
             std::cout << buildTime << std::endl;
+            std::cout << "Occupied space = ";
+            std::cout << spaceOutput << std::endl;
+            std::cout << "Page disk percentage = ";
+            std::cout << percentageOutput << std::endl;
             std::cout << "Search time = ";
             std::cout << averageDuration << std::endl << std::endl;
+            IOControl::cleanControllerData(controller.getControllerPrefix());
+            controller.Cached.clear();
 
         }
         std::cout << std::endl << std::endl;
@@ -152,7 +115,12 @@ void boostRTreeExperiment(){
 
     std::string anUuid = FilenameGenerator::makeUuid();
     writeToFile(anUuid, "experiment_build", "inputsize,heuristic,timeelapsed", buildTimeOutput);
+    writeToFile(anUuid, "experiment_occupiedspace", "inputsize,heuristic,space", occupiedSpaceOutput);
+    writeToFile(anUuid, "experiment_pagediskpercentage", "inputsize,heuristic,percentage", pageDiskPercentageOutput);
     writeToFile(anUuid, "experiment_searchtime", "inputsize,heuristic,timeelapsed", searchTimeOutput);
+
+    delete heuristics[0];
+    delete heuristics[1];
 }
 
 void increaseStackSize(){
@@ -178,7 +146,7 @@ void increaseStackSize(){
 
 int main() {
     increaseStackSize();
-    boostRTreeExperiment();
+    make_experiments();
 
     return 0;
 }
