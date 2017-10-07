@@ -14,16 +14,20 @@ endif()
 
 
 add_executable(${TARGET_NAME} main.cpp)
+add_executable(BoostRTreeComparison BoostRTreeComparison.cpp)
 target_link_libraries(${TARGET_NAME} RTreeLib)
+target_link_libraries(BoostRTreeComparison RTreeLib)
 
 
 
 if(NOT MSVC)
-    find_package(Boost REQUIRED COMPONENTS serialization filesystem)
+    find_package(Boost REQUIRED COMPONENTS serialization filesystem system)
 
     if (Boost_FOUND)
         include_directories(${Boost_INCLUDE_DIRS})
-        target_link_libraries(${TARGET_NAME} ${Boost_LIBRARIES})
+        target_link_libraries(RTreeLib ${Boost_LIBRARIES})
+        #target_link_libraries(${TARGET_NAME} ${Boost_LIBRARIES})
+        #target_link_libraries(BoostRTreeComparison ${Boost_LIBRARIES})
     endif()
 endif()
 

@@ -30,10 +30,10 @@ target_link_libraries(auxtests RTreeLib gtest gtest_main)
 
 
 if(NOT MSVC)
-    find_package(Boost REQUIRED COMPONENTS serialization filesystem)
+    find_package(Boost REQUIRED COMPONENTS serialization filesystem system)
     if (Boost_FOUND)
         include_directories(${Boost_INCLUDE_DIRS})
-        target_link_libraries(tests ${Boost_LIBRARIES})
-        target_link_libraries(auxtests ${Boost_LIBRARIES})
+        #target_link_libraries(tests ${Boost_LIBRARIES})
+        #target_link_libraries(auxtests ${Boost_LIBRARIES})
     endif()
 endif()
