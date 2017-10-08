@@ -72,13 +72,15 @@ void make_experiments(){
                                   std::to_string(percentageOutput);
 
             long sumElapsedSearch = 0;
+            Experiments::startExperiment("search");
             for(Rectangle &randomRectangle : randomVRect){
-                Experiments::startExperiment("search");
+
                 controller.search(randomRectangle);
-                ExperimentData &searchExperiment = Experiments::stopExperiment();
-                sumElapsedSearch += searchExperiment.retrieveTimeElapsedNanoSeconds();
+                //sumElapsedSearch += searchExperiment.retrieveTimeElapsedNanoSeconds();
             }
-            long averageDuration = sumElapsedSearch / randomVRect.size();
+            ExperimentData &searchExperiment = Experiments::stopExperiment();
+            long averageDuration = searchExperiment.retrieveTimeElapsedNanoSeconds();
+            //long averageDuration = sumElapsedSearch / randomVRect.size();
 
             searchOutputStr = std::to_string(inputSize)+","+
                               heuristics[j]->heuristicName()+","+

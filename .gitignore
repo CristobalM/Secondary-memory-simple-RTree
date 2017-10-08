@@ -5,3 +5,4 @@ test/lib/
 .idea/workspace.xml
 .idea/
 bin/
+build/
