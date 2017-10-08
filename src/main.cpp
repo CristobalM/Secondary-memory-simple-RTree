@@ -47,7 +47,7 @@ void make_experiments(){
         const int inputSize = 1 << i; // (int)std::pow(2, i);
         std::cout << "input size:" << inputSize << std::endl;
         RandomRectangleGenerator::generateDataFile(inputSize, input);
-        vRect randomVRect = RandomRectangleGenerator::generateVRect(1000);
+        vRect randomVRect = RandomRectangleGenerator::generateVRect(inputSize/10);
         for(int j = 0; j <= 1; j++) {
             //construction
             std::cout << heuristics[j]->heuristicName() << std::endl;
